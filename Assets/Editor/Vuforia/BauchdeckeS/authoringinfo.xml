@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="14.0" toolVersion="7.0.0">
+<ModelTarget name="BauchdeckeS" targetId="783953a24d524a4f9425007b4cdf0377" version="11.0" toolVersion="3.0.0" bbox="-0.132879 0.183807 -0.847171 0.143761 0.321477 -0.406771" previewImage="783953a24d524a4f9425007b4cdf0377_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="BauchdeckeSs_assembly" assemblyId="83558ec3bfcf498197fb5d69e18f66e0">
+<Part name="BauchdeckeS" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="rightside" translation="0.621352 0.085603 0.913933" rotation="AD: 0.9551592624357921 -0.4239268772658359 1.083177123551125 207.897" image="BauchdeckeS_rightside.png">
+
+</EntryPoint>
+<EntryPoint name="leftside" translation="-0.631164 0.185964 0.802412" rotation="AD: -0.9718851025455577 -0.34970911717326214 0.991053279721586 153.054" image="BauchdeckeS_leftside.png">
+
+</EntryPoint>
+<EntryPoint name="top" translation="-0.630586 0.0569827 0.897293" rotation="AD: 0.9037661314777046 0.8162514412034185 -0.9030762264848675 236.631" image="BauchdeckeS_top.png">
+
+</EntryPoint>
+<EntryPoint name="leftdiagonal" translation="-0.566233 -0.0419269 1.03492" rotation="AD: -0.8700975164141097 -0.6180244097932732 1.4893387223252343 157.704" image="BauchdeckeS_leftdiagonal.png">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

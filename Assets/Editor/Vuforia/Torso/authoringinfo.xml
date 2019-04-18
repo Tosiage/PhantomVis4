@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="14.0" toolVersion="7.0.0">
+<ModelTarget name="Torso" targetId="fb253d7795b8417e8e684899fe18969a" version="11.0" toolVersion="3.0.0" bbox="-0.205911 -1.539530 0.020589 0.177124 -0.842000 0.269556" previewImage="fb253d7795b8417e8e684899fe18969a_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="Torsos_assembly" assemblyId="39f9464df18a4d65aed65e4b45703701">
+<Part name="Torso" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-0.043368 -0.492681 2.15288" rotation="AD: 0.9999999999197611 -0.004839172582914761 0.0031125982081885843 114.502" image="Torso_viewpoint_0000.png">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="BauchdeckeS"/>
+
+</Tracking>
+
+<Assembly name="BauchdeckeSs_assembly" assemblyId="83558ec3bfcf498197fb5d69e18f66e0">
+<Part name="BauchdeckeS" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="bottom" translation="-0.0825868 -0.203826 1.31282" rotation="AD: -0.11904498992843203 -1.048753332746532 3.1053544166385505 178.595">
+
+</EntryPoint>
+<EntryPoint name="rightside" translation="0.595552 0.142544 0.858511" rotation="AD: 0.9693459479242056 -0.35347199152189873 1.0466291507803374 205.115">
+
+</EntryPoint>
+<EntryPoint name="top" translation="0.0242632 0.553697 0.319228" rotation="AD: 0.9999998896051897 -0.012946789328198332 0.038335391332029116 217.294">
+
+</EntryPoint>
+<EntryPoint name="leftside" translation="-0.653876 0.207327 0.77354" rotation="AD: 0.9803224894386962 0.3066317479412884 -0.9079353771943754 207.154">
+
+</EntryPoint>
+
+</Assembly>
+<ModelTargetDatabase name="PhantomVis4" />
+</QCARConfig>

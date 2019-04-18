@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="Torso"/>
+
+</Tracking>
+
+<Assembly name="Torsos_assembly" assemblyId="39f9464df18a4d65aed65e4b45703701">
+<Part name="Torso" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-0.043368 -0.492681 2.15288" rotation="AD: 0.9999999999197611 -0.004839172582914761 0.0031125982081885843 114.502">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARConfig>
