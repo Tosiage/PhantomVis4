@@ -223,6 +223,7 @@ public class DefaultModelRecoEventHandler : MonoBehaviour, IObjectRecoEventHandl
         {
             modelTargetGameObj = Instantiate(ModelTargetTemplate.gameObject);
             builtFromTemplate = true;
+            Debug.Log("Build from Template true");
         }
 
         if (!modelTargetGameObj)
