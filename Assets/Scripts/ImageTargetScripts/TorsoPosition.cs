@@ -18,13 +18,15 @@ public class TorsoPosition : MonoBehaviour {
 
     private void targetTracking(bool Bool)
     {
-       /* if (Bool == true)
+        if (Bool == true)
         {
             //Debug.Log("moin");
-            this.transform.position = GameObject.Find("Sphere_Astronaut").transform.position;
-            Vector3 temp = new Vector3(0.25f, 0, 0);
-            this.transform.position = this.transform.position + temp;
-        }*/
+            var cube_Astronaut = GameObject.Find("Cube_Astronaut").transform;
+            Vector3 temp = cube_Astronaut.TransformPoint(2, 0, 0);
+            this.transform.position = temp;
+            this.transform.rotation = cube_Astronaut.rotation;
+            
+        }
     }
 
 }
