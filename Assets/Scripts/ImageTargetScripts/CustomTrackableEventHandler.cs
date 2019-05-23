@@ -1,22 +1,9 @@
-/*==============================================================================
-Copyright (c) 2017 PTC Inc. All Rights Reserved.
-
-Copyright (c) 2010-2014 Qualcomm Connected Experiences, Inc.
-All Rights Reserved.
-Confidential and Proprietary - Protected under copyright and other laws.
-==============================================================================*/
-
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-/// <summary>
-/// A custom handler that implements the ITrackableEventHandler interface.
-///
-/// Changes made to this file could be overwritten when upgrading the Vuforia version.
-/// When implementing custom event handler behavior, consider inheriting from this class instead.
-/// </summary>
-public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
-{
+public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler {
     #region PROTECTED_MEMBER_VARIABLES
 
     protected TrackableBehaviour mTrackableBehaviour;
@@ -55,25 +42,37 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         m_PreviousStatus = previousStatus;
         m_NewStatus = newStatus;
 
-        if (newStatus == TrackableBehaviour.Status.DETECTED ||
-            newStatus == TrackableBehaviour.Status.TRACKED ||
-            newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
+        if (newStatus == TrackableBehaviour.Status.DETECTED)
         {
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found " + newStatus.ToString());
-            OnTrackingFound();
+            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " detected " + newStatus.ToString());
+            OnTrackingFound(Color.blue);
         }
-        else if (previousStatus == TrackableBehaviour.Status.TRACKED &&
-                 newStatus == TrackableBehaviour.Status.NO_POSE)
+        else if (newStatus == TrackableBehaviour.Status.TRACKED)
         {
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
-            OnTrackingLost();
+            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " tracked " + newStatus.ToString());
+            OnTrackingFound(Color.green);
+        }
+        else if (newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
+        {
+            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " extended tracked " + newStatus.ToString());
+            OnTrackingFound(Color.yellow);
+        }
+        else if(newStatus == TrackableBehaviour.Status.LIMITED)
+        {
+            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " limited " + newStatus.ToString());
+            OnTrackingFound(Color.red);
+        }
+        else if (newStatus == TrackableBehaviour.Status.NO_POSE)
+        {
+            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost" + newStatus.ToString());
+            OnTrackingFound(Color.black);
         }
         else
         {
             // For combo of previousStatus=UNKNOWN + newStatus=UNKNOWN|NOT_FOUND
             // Vuforia is starting, but tracking has not been lost or found yet
             // Call OnTrackingLost() to hide the augmentations
-            OnTrackingLost();
+            OnTrackingLost(Color.black);
         }
     }
 
@@ -81,7 +80,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
     #region PROTECTED_METHODS
 
-    protected virtual void OnTrackingFound()
+    protected virtual void OnTrackingFound(Color MaterialColor)
     {
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
@@ -89,7 +88,12 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
         // Enable rendering:
         foreach (var component in rendererComponents)
+        {
             component.enabled = true;
+            component.material.color = MaterialColor;
+        }
+           
+            
 
         // Enable colliders:
         foreach (var component in colliderComponents)
@@ -101,24 +105,8 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
     }
 
 
-    protected virtual void OnTrackingLost()
-    {
-        var rendererComponents = GetComponentsInChildren<Renderer>(true);
-        var colliderComponents = GetComponentsInChildren<Collider>(true);
-        var canvasComponents = GetComponentsInChildren<Canvas>(true);
-
-        // Disable rendering:
-        foreach (var component in rendererComponents)
-            component.enabled = false;
-
-        // Disable colliders:
-        foreach (var component in colliderComponents)
-            component.enabled = false;
-
-        // Disable canvas':
-        foreach (var component in canvasComponents)
-            component.enabled = false;
-    }
+    protected virtual void OnTrackingLost(Color MaterialColor)
+    { }
 
     #endregion // PROTECTED_METHODS
 }

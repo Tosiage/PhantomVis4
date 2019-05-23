@@ -11,7 +11,9 @@ public class TargetScript : MonoBehaviour, ITrackableEventHandler {
     // Use this for initialization
     void Start()
     {
-        modelToShow = GameObject.Find("greenCube");
+        //modelToShow = GameObject.Find("greenCube");
+        //modelToShow = GameObject.Find("torso_complete");
+        modelToShow = GameObject.Find("TorsoParent");
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
         if (mTrackableBehaviour)
         {

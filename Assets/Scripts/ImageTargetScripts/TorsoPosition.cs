@@ -20,11 +20,17 @@ public class TorsoPosition : MonoBehaviour {
     {
         if (Bool == true)
         {
-            //Debug.Log("moin");
-            var cube_Astronaut = GameObject.Find("Cube_Astronaut").transform;
-            Vector3 temp = cube_Astronaut.TransformPoint(2, 0, 0);
-            this.transform.position = temp;
-            this.transform.rotation = cube_Astronaut.rotation;
+            var targetTransform = GameObject.Find("Empty").transform;
+            var temp = targetTransform.localToWorldMatrix * new Vector4(2, 0, 0, 1);
+          //  Vector3 temp = targetTransform.TransformPoint(2, 0, 0);
+           // this.transform.position = temp;
+          //  Vector3 hoi = new Vector3(2, 0, 0);
+           // Vector3 thePos = targetTransform.TransformPointUnscaled(hoi);
+            //this.transform.position = thePos;
+            //this.transform.rotation = targetTransform.rotation;
+
+            //Vector 4 (2,0,0,1)
+            //obj.transform.localtoworld
             
         }
     }
