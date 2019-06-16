@@ -9,6 +9,7 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
     protected TrackableBehaviour mTrackableBehaviour;
     protected TrackableBehaviour.Status m_PreviousStatus;
     protected TrackableBehaviour.Status m_NewStatus;
+    private TargetData targetData;
 
     #endregion // PROTECTED_MEMBER_VARIABLES
 
@@ -16,9 +17,11 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
 
     protected virtual void Start()
     {
+        targetData = GetComponent<TargetData>();
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
         if (mTrackableBehaviour)
             mTrackableBehaviour.RegisterTrackableEventHandler(this);
+
     }
 
     protected virtual void OnDestroy()
@@ -45,27 +48,27 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
         if (newStatus == TrackableBehaviour.Status.DETECTED)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " detected " + newStatus.ToString());
-            OnTrackingFound(Color.blue);
+            OnTrackingFound(Color.blue, false);
         }
         else if (newStatus == TrackableBehaviour.Status.TRACKED)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " tracked " + newStatus.ToString());
-            OnTrackingFound(Color.green);
+            OnTrackingFound(Color.green, true);
         }
         else if (newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " extended tracked " + newStatus.ToString());
-            OnTrackingFound(Color.yellow);
+            OnTrackingFound(Color.yellow, false);
         }
         else if(newStatus == TrackableBehaviour.Status.LIMITED)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " limited " + newStatus.ToString());
-            OnTrackingFound(Color.red);
+            OnTrackingFound(Color.red, false);
         }
         else if (newStatus == TrackableBehaviour.Status.NO_POSE)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost" + newStatus.ToString());
-            OnTrackingFound(Color.black);
+            OnTrackingFound(Color.black, false);
             //
         }
         else
@@ -81,21 +84,20 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
 
     #region PROTECTED_METHODS
 
-    protected virtual void OnTrackingFound(Color MaterialColor)
+    protected virtual void OnTrackingFound(Color MaterialColor, bool isVisible)
     {
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
         var canvasComponents = GetComponentsInChildren<Canvas>(true);
 
+        targetData.isVisible = isVisible;
         // Enable rendering:
         foreach (var component in rendererComponents)
         {
             component.enabled = true;
             component.material.color = MaterialColor;
-        }
-           
+        }    
             
-
         // Enable colliders:
         foreach (var component in colliderComponents)
             component.enabled = true;
