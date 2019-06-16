@@ -66,6 +66,7 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost" + newStatus.ToString());
             OnTrackingFound(Color.black);
+            //
         }
         else
         {
