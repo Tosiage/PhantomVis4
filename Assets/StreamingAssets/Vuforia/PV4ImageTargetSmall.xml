@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="frame30" size="0.030000 0.030000" />
+    <ImageTarget name="frame29" size="0.030000 0.030000" />
+    <ImageTarget name="frame28" size="0.030000 0.030000" />
+    <ImageTarget name="frame27" size="0.030000 0.030000" />
+    <ImageTarget name="frame26" size="0.030000 0.030000" />
+    <ImageTarget name="frame25" size="0.030000 0.030000" />
+    <ImageTarget name="frame24" size="0.030000 0.030000" />
+    <ImageTarget name="frame23" size="0.030000 0.030000" />
+    <ImageTarget name="frame22" size="0.030000 0.030000" />
+    <ImageTarget name="frame21" size="0.030000 0.030000" />
+    <ImageTarget name="frame20" size="0.030000 0.030000" />
+    <ImageTarget name="frame19" size="0.030000 0.030000" />
+    <ImageTarget name="frame18" size="0.030000 0.030000" />
+    <ImageTarget name="frame17" size="0.030000 0.030000" />
+    <ImageTarget name="frame16" size="0.030000 0.030000" />
+    <ImageTarget name="frame15" size="0.030000 0.030000" />
+    <ImageTarget name="frame14" size="0.030000 0.030000" />
+    <ImageTarget name="frame13" size="0.030000 0.030000" />
+    <ImageTarget name="frame12" size="0.030000 0.030000" />
+    <ImageTarget name="frame11" size="0.030000 0.030000" />
+    <ImageTarget name="frame10" size="0.030000 0.030000" />
+    <ImageTarget name="frame9" size="0.030000 0.030000" />
+    <ImageTarget name="frame8" size="0.030000 0.030000" />
+    <ImageTarget name="frame7" size="0.030000 0.030000" />
+    <ImageTarget name="frame6" size="0.030000 0.030000" />
+    <ImageTarget name="frame5" size="0.030000 0.030000" />
+    <ImageTarget name="frame4" size="0.030000 0.030000" />
+    <ImageTarget name="frame3" size="0.030000 0.030000" />
+    <ImageTarget name="frame2" size="0.030000 0.030000" />
+    <ImageTarget name="frame1" size="0.030000 0.030000" />
+  </Tracking>
+</QCARConfig>
