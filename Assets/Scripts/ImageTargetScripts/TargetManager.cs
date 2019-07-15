@@ -5,10 +5,13 @@ using UnityEngine;
 public class TargetManager : MonoBehaviour {
     public GameObject[] targets;
     public List<TargetData> targetDatas;
+    public bool atLeastOneVisible;
 
     // Use this for initialization
     void Start () {
-        targets = GameObject.FindGameObjectsWithTag("targets");
+
+        atLeastOneVisible = false;
+        targets = GameObject.FindGameObjectsWithTag("target");
         foreach (GameObject t in targets)
         {
             var data = t.GetComponent<TargetData>();
@@ -18,6 +21,14 @@ public class TargetManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        atLeastOneVisible = false;
+        foreach (TargetData t in targetDatas)
+        {
+            if (t.isVisible)
+            {
+                atLeastOneVisible = true;
+                return;
+            }
+        }
+    }
 }

@@ -3,39 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ModelPositionUpdater : MonoBehaviour {
-    public Transform target1;
-    public Transform target2;
-    public Transform target3;
-    public Transform target4;
-    public Transform target5;
-    public Transform target6;
-    public Transform target7;
-    public Transform target8;
-    public Transform target9;
-    public Transform target10;
-    public Transform target11;
-    public Transform target12;
-    public Transform target13;
-    public Transform target14;
-    public Transform target15;
-    public Transform target16;
-
-    [HideInInspector] public TargetData targetData1;
-    [HideInInspector] public TargetData targetData2;
-    [HideInInspector] public TargetData targetData3;
-    [HideInInspector] public TargetData targetData4;
-    [HideInInspector] public TargetData targetData5;
-    [HideInInspector] public TargetData targetData6;
-    [HideInInspector] public TargetData targetData7;
-    [HideInInspector] public TargetData targetData8;
-    [HideInInspector] public TargetData targetData9;
-    [HideInInspector] public TargetData targetData10;
-    [HideInInspector] public TargetData targetData11;
-    [HideInInspector] public TargetData targetData12;
-    [HideInInspector] public TargetData targetData13;
-    [HideInInspector] public TargetData targetData14;
-    [HideInInspector] public TargetData targetData15;
-    [HideInInspector] public TargetData targetData16;
 
     [HideInInspector] public Vector3 pos1;
     [HideInInspector] public Vector3 pos2;
@@ -56,51 +23,12 @@ public class ModelPositionUpdater : MonoBehaviour {
     // Use this for initialization
     void Start () {
         
-        //Die Daten aller Targets die in der Szene existieren.
-        //Daten sind relative Position und relative Rotation
-        targetData1 = target1.GetComponent<TargetData>();
-        targetData2 = target2.GetComponent<TargetData>();
-        targetData3 = target3.GetComponent<TargetData>();
-        targetData4 = target4.GetComponent<TargetData>();
-        targetData5 = target5.GetComponent<TargetData>();
-        targetData6 = target6.GetComponent<TargetData>();
-        targetData7 = target7.GetComponent<TargetData>();
-        targetData8 = target8.GetComponent<TargetData>();
-        targetData9 = target9.GetComponent<TargetData>();
-        targetData10 = target10.GetComponent<TargetData>();
-        targetData11 = target11.GetComponent<TargetData>();
-        targetData12 = target12.GetComponent<TargetData>();
-        targetData13 = target13.GetComponent<TargetData>();
-        targetData14 = target14.GetComponent<TargetData>();
-        targetData15 = target15.GetComponent<TargetData>();
-        targetData16 = target16.GetComponent<TargetData>();
-
-
-        //Liste, um über alle targetDatas iterieren zu können
-        targetDatas = new List<TargetData>
-        {
-            targetData1,
-            targetData2,
-            targetData3,
-            targetData4,
-            targetData5,
-            targetData6,
-            targetData7,
-            targetData8,
-            targetData9,
-            targetData10,
-            targetData11,
-            targetData12,
-            targetData13,
-            targetData14,
-            targetData15,
-            targetData16
-        };
+       
         positions = new List<Vector3>();
         rotations = new List<Quaternion>();
 
         targetManagerTargets = GameObject.Find("TargetManager").GetComponent<TargetManager>().targets;
-        targetManagerTargetDatas = GameObject.Find("TargetManager").GetComponent<TargetManager>().targetDatas;
+        targetDatas = GameObject.Find("TargetManager").GetComponent<TargetManager>().targetDatas;
 
     }
 	
@@ -117,16 +45,23 @@ public class ModelPositionUpdater : MonoBehaviour {
         //Anschließend werden Mittelwerte beider Listen gebildet und dem GameObjekt des Phantoms zugewiesen
         foreach(TargetData td in targetDatas)
         {
-            if (td.isVisible)
+            if (td.isVisible && td.initialCalibration || td.isVisible && td.calibrated)
             {
                 var currentTransform = td.transform;
-                Quaternion targetRot = Quaternion.Euler(td.angleX, td.angleY, td.angleZ);
+               // Quaternion offsetRot = Quaternion.Euler(td.angleX, td.angleY, td.angleZ);
+                Quaternion offsetRot = td.relativeRot;
 
-                Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation * targetRot);
+                var addedOffsetPosition = td.relativePos;
+                var multipliedOffsetRot = td.relativeRot;
+
+                //wenn man die TargetData per hand eingibt, muss die offsetRot noch draufmultipliziert werden,
+                //wenn man die TargetData mit Calibrate kalibriert, nicht.
+                // Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation * offsetRot);
+                Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation);
                 Matrix4x4 Mtra = Matrix4x4.Translate(currentTransform.position);
-                Vector3 posfinal = (Vector3)(Mtra * Mrot * new Vector4(td.relativePos.x, td.relativePos.y, td.relativePos.z, 1));
+                Vector3 posfinal = (Vector3)(Mtra * Mrot * new Vector4(addedOffsetPosition.x, addedOffsetPosition.y, addedOffsetPosition.z, 1));
                 positions.Add(posfinal);
-                rotations.Add(currentTransform.rotation * targetRot);
+                rotations.Add(currentTransform.rotation * multipliedOffsetRot);
  
             }
         }
@@ -148,7 +83,7 @@ public class ModelPositionUpdater : MonoBehaviour {
 
         if(rotations.Count < 1)
         {
-           
+           // this.gameObject.transform.GetComponent<Renderer>().enabled = false;
             return;
         }
      

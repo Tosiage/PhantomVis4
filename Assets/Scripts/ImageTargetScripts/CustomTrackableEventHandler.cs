@@ -48,27 +48,27 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
         if (newStatus == TrackableBehaviour.Status.DETECTED)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " detected " + newStatus.ToString());
-            OnTrackingFound(Color.blue, false);
+            OnTrackingFound(Color.blue, false, false);
         }
         else if (newStatus == TrackableBehaviour.Status.TRACKED)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " tracked " + newStatus.ToString());
-            OnTrackingFound(Color.green, true);
+            OnTrackingFound(Color.green, true, false);
         }
         else if (newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " extended tracked " + newStatus.ToString());
-            OnTrackingFound(Color.yellow, false);
+            OnTrackingFound(Color.yellow, false, true);
         }
         else if(newStatus == TrackableBehaviour.Status.LIMITED)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " limited " + newStatus.ToString());
-            OnTrackingFound(Color.red, false);
+            OnTrackingFound(Color.red, false, false);
         }
         else if (newStatus == TrackableBehaviour.Status.NO_POSE)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost" + newStatus.ToString());
-            OnTrackingFound(Color.black, false);
+            OnTrackingFound(Color.black, false, false);
             //
         }
         else
@@ -84,18 +84,23 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
 
     #region PROTECTED_METHODS
 
-    protected virtual void OnTrackingFound(Color MaterialColor, bool isVisible)
+    protected virtual void OnTrackingFound(Color MaterialColor, bool isVisible, bool isExtendedTracked)
     {
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
         var canvasComponents = GetComponentsInChildren<Canvas>(true);
 
         targetData.isVisible = isVisible;
+        targetData.isExtendedTracked = isExtendedTracked;
         // Enable rendering:
         foreach (var component in rendererComponents)
         {
             component.enabled = true;
-            component.material.color = MaterialColor;
+            if(mTrackableBehaviour.TrackableName != "ar_marker17")
+            {
+                component.material.color = MaterialColor;
+            }
+            
         }    
             
         // Enable colliders:
