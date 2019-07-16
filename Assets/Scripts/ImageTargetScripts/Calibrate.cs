@@ -43,7 +43,6 @@ public class Calibrate : MonoBehaviour {
     {
         calibrationStep1 = false;
         model.GetComponent<ModelPositionUpdater>().enabled = true;
-        Debug.Log("pos " + model.transform.position + " rot " + model.transform.rotation);
         foreach(TargetData t in targetDatas)
         {
             if (t.isVisible)
@@ -60,7 +59,6 @@ public class Calibrate : MonoBehaviour {
     {
         var currentTransform = td.transform;
         Quaternion targetRot = Quaternion.Euler(td.angleX, td.angleY, td.angleZ);
-
         Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation * targetRot);
         Matrix4x4 Mtra = Matrix4x4.Translate(currentTransform.position);
         Vector3 posfinal = (Vector3)(Mtra * Mrot * new Vector4(td.relativePos.x, td.relativePos.y, td.relativePos.z, 1));
@@ -76,10 +74,8 @@ public class Calibrate : MonoBehaviour {
         //InverseTransformDirection transforms direction from world space into local space, unaffected by scale
         Vector3 relativePosition = t.transform.InverseTransformDirection(distance);
         t.relativePos = relativePosition;
-        Debug.Log(t.transform.name + " Offset Position saved: " + t.relativePos);
         Quaternion offsetRot = Quaternion.Inverse(t.transform.rotation) * model.transform.rotation;
         t.relativeRot = offsetRot;
-        Debug.Log(t.transform.name + " Offset Rotation saved: " + t.relativeRot);
         t.initialCalibration = true;
     }
 
@@ -93,15 +89,10 @@ public class Calibrate : MonoBehaviour {
             {
 
                 Vector3 distance = model.transform.position - t.transform.position;
-                Debug.Log(t.transform.name + " distance: " + distance + " = " + model.transform.position + " - " + t.relativePos);
                 Vector3 relativePosition = t.transform.InverseTransformDirection(distance);
-                Debug.Log(t.transform.name + " relativePosition (inverseTransformDirection) " + relativePosition);
                 t.relativePosTemp = relativePosition - t.relativePos;
-                Debug.Log(t.transform.name + " t.relativePosTemp: " + t.relativePosTemp + " = " + relativePosition + " - " + t.relativePos);
-                Debug.Log(t.transform.name + "SaveToTemp Offset Position saved: " + t.relativePosTemp);
                 Quaternion offsetRot = Quaternion.Inverse(t.transform.rotation) * model.transform.rotation;
-                t.relativeRotTemp = offsetRot;
-                // Debug.Log(t.transform.name + "SaveToTemp Offset Rotation saved: " + t.relativeRotTemp);
+                t.relativeRotTemp = offsetRot * Quaternion.Inverse(t.relativeRot);
                 t.initialCalibration = false;
 
             }
@@ -119,20 +110,15 @@ public class Calibrate : MonoBehaviour {
                  t.calibrated = true;
                  t.relativePos = t.relativePos + t.relativePosTemp;
                  t.relativeRot = t.relativeRot * t.relativeRotTemp;
-               
-                var temp = t.relativePos + t.relativePosTemp;
-                var temp2 = t.relativeRot * t.relativeRotTemp;
-                Debug.Log("AddedOffsetPosition will be: " + temp + " = " + t.relativePos + " + " + t.relativePosTemp);
-                Debug.Log("AddedOffsetRotation will be: " + temp2 + " = " + t.relativeRot + " * " + t.relativeRotTemp);
-                Debug.Log("SaveOffset");
+
              }
             if (t.initialCalibration)
             {
                 t.initialCalibration = false;
             }
             t.relativePosTemp = Vector3.zero;
-             t.relativeRotTemp = Quaternion.identity;
-            Debug.Log("Set temp to zero");
+            t.relativeRotTemp = Quaternion.identity;
+
 
 
         }

@@ -8,7 +8,7 @@ public class TargetManager : MonoBehaviour {
     public bool atLeastOneVisible;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
 
         atLeastOneVisible = false;
         targets = GameObject.FindGameObjectsWithTag("target");
