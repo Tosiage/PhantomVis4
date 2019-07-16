@@ -23,60 +23,48 @@ public class CalibrationButtons : MonoBehaviour, IInputClickHandler {
         if(this.name == "arrowYPositive")
         {
             model.transform.position = new Vector3(model.transform.position.x, model.transform.position.y + 0.01f, model.transform.position.z);
-            Debug.Log(model.transform.position);
-            //calibrate.SaveOffset();
             calibrate.SaveToTemp();
         }
         if (this.name == "arrowYNegative")
         {
             model.transform.position = new Vector3(model.transform.position.x, model.transform.position.y - 0.01f, model.transform.position.z);
-            Debug.Log(model.transform.position);
-           // calibrate.SaveOffset();
             calibrate.SaveToTemp();
         }
         if (this.name == "arrowXPositive")
         {
             model.transform.position = new Vector3(model.transform.position.x + 0.01f, model.transform.position.y, model.transform.position.z);
-            Debug.Log(model.transform.position);
-            //calibrate.SaveOffset();
             calibrate.SaveToTemp();
         }
         if (this.name == "arrowXNegative")
         {
             model.transform.position = new Vector3(model.transform.position.x - 0.01f, model.transform.position.y, model.transform.position.z);
-            Debug.Log(model.transform.position);
-           // calibrate.SaveOffset();
             calibrate.SaveToTemp();
         }
         if (this.name == "arrowZPositive")
         {
             model.transform.position = new Vector3(model.transform.position.x, model.transform.position.y, model.transform.position.z + 0.01f);
-            Debug.Log(model.transform.position);
-           // calibrate.SaveOffset();
             calibrate.SaveToTemp();
         }
-        if (this.name == "arrowYNegative")
+        if (this.name == "arrowZNegative")
         {
             model.transform.position = new Vector3(model.transform.position.x, model.transform.position.y, model.transform.position.z - 0.01f);
-            Debug.Log(model.transform.position);
-           // calibrate.SaveOffset();
             calibrate.SaveToTemp();
         }
 
         //Rotation Buttons
         if (this.name == "buttonYAxis")
         {
-            model.transform.Rotate(0f, 1f, 0f, Space.World);
+            model.transform.Rotate(0, 5, 0);
             calibrate.SaveToTemp();
         }
         if (this.name == "buttonXAxis")
         {
-            model.transform.Rotate(1f, 0f, 0f, Space.World);
+            model.transform.Rotate(5, 0, 0);
             calibrate.SaveToTemp();
         }
         if (this.name == "buttonZAxis")
         {
-            model.transform.Rotate(0f, 0f, 1f, Space.World);
+            model.transform.Rotate(0, 0, 5);
             calibrate.SaveToTemp();
         }
 
