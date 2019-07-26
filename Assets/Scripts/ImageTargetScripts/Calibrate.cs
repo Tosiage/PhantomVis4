@@ -87,13 +87,16 @@ public class Calibrate : MonoBehaviour {
         {
             if (t.isVisible)
             {
-
                 Vector3 distance = model.transform.position - t.transform.position;
                 Vector3 relativePosition = t.transform.InverseTransformDirection(distance);
                 t.relativePosTemp = relativePosition - t.relativePos;
                 Quaternion offsetRot = Quaternion.Inverse(t.transform.rotation) * model.transform.rotation;
-                t.relativeRotTemp = offsetRot * Quaternion.Inverse(t.relativeRot);
+                t.relativeRotTemp = Quaternion.Inverse(t.relativeRot) * offsetRot;
                 t.initialCalibration = false;
+                //Debug.Log(t.transform.name + " t.relativePos = " + t.relativePos);
+                //Debug.Log(t.transform.name + " t.relativePosTemp = " + t.relativePosTemp);
+                //Debug.Log(t.transform.name + " t.relativeRot = " + t.relativeRot);
+                //Debug.Log(t.transform.name + " t.relativeRotTemp = " + t.relativeRotTemp);
 
             }
         }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetData : MonoBehaviour {
+public class TargetData : MonoBehaviour
+{
     public Vector3 relativePos;
     public Vector3 relativePosTemp;
     public Quaternion relativeRot;
@@ -10,14 +11,17 @@ public class TargetData : MonoBehaviour {
     public float angleX;
     public float angleY;
     public float angleZ;
-    [HideInInspector] public bool isVisible;
+    public bool isVisible;
     [HideInInspector] public bool isExtendedTracked;
     public bool calibrated;
     public bool initialCalibration;
+    public Matrix4x4 matrix;
+    public Quaternion rotPMTold;
+    public Vector3 posPMTold;
 
     //Durch Kalibrierung mit der Polaris werden die Werte für die relative Position und relative Rotation gesetzt
-    public TargetData(Vector3 relativePos, Vector3 relativePosTemp, Quaternion relativeRot, Quaternion relativeRotTemp, int angleX, int angleY, int angleZ, 
-        bool isVisible, bool isExtendedTracked,bool calibrated, bool initialCalibration)
+    public TargetData(Vector3 relativePos, Vector3 relativePosTemp, Quaternion relativeRot, Quaternion relativeRotTemp, int angleX, int angleY, int angleZ,
+        bool isVisible, bool isExtendedTracked, bool calibrated, bool initialCalibration, Matrix4x4 matrix, Vector3 posPMTold, Quaternion rotPMTold)
     {
         this.relativePos = relativePos;
         this.relativePosTemp = relativePosTemp;
@@ -30,6 +34,9 @@ public class TargetData : MonoBehaviour {
         this.angleX = angleX;
         this.angleY = angleY;
         this.angleZ = angleZ;
+        this.matrix = matrix;
+        this.posPMTold = posPMTold;
+        this.rotPMTold = rotPMTold;
     }
-	
+
 }

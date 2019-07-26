@@ -51,8 +51,8 @@ public class ModelPositionUpdater : MonoBehaviour {
                // Quaternion offsetRot = Quaternion.Euler(td.angleX, td.angleY, td.angleZ);
                 Quaternion offsetRot = td.relativeRot;
 
-                var addedOffsetPosition = td.relativePos;
-                var multipliedOffsetRot = td.relativeRot;
+                var addedOffsetPosition = td.relativePos + td.relativePosTemp;
+                var multipliedOffsetRot = td.relativeRot * td.relativeRotTemp;
 
                 //wenn man die TargetData per hand eingibt, muss die offsetRot noch draufmultipliziert werden,
                 //wenn man die TargetData mit Calibrate kalibriert, nicht.
