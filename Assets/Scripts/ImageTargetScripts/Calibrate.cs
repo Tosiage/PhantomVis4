@@ -10,7 +10,7 @@ public class Calibrate : MonoBehaviour
     public GameObject model;
     public GameObject modelParent;
     public bool calibrationStep1;
-    ModelData md;
+   // ModelData md;
 
 
     // Use this for initialization
@@ -19,7 +19,7 @@ public class Calibrate : MonoBehaviour
         targetManagerTargets = GameObject.Find("TargetManager").GetComponent<TargetManager>().targets;
         targetDatas = GameObject.Find("TargetManager").GetComponent<TargetManager>().targetDatas;
         td = GameObject.Find("CalibrationTarget").GetComponent<TargetData>();
-        md = model.GetComponent<ModelData>();
+      //  md = model.GetComponent<ModelData>();
         calibrationStep1 = true;
         foreach (TargetData t in targetDatas)
         {
@@ -30,8 +30,8 @@ public class Calibrate : MonoBehaviour
             t.relativeRot = Quaternion.identity;
             //t.relativeRotTemp = Quaternion.identity;
         }
-        md.posTempModel = Vector3.zero;
-        md.rotTempModel = Quaternion.identity;
+      //  md.posTempModel = Vector3.zero;
+        //md.rotTempModel = Quaternion.identity;
     }
 
     private void Update()
@@ -145,8 +145,10 @@ public class Calibrate : MonoBehaviour
             //t.relativePosTemp = Vector3.zero;
             //t.relativeRotTemp = Quaternion.identity;
         }
-        md.posTempModel = Vector3.zero;
-        md.rotTempModel = Quaternion.identity;
+        model.transform.localPosition = Vector3.zero;
+        model.transform.localRotation = Quaternion.identity;
+      //  md.posTempModel = Vector3.zero;
+       // md.rotTempModel = Quaternion.identity;
     }
 
 

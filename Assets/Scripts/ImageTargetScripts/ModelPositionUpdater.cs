@@ -141,7 +141,6 @@ public class ModelPositionUpdater : MonoBehaviour
 
         this.transform.position = averagePos;
         this.transform.rotation = averageRotation;
-        Debug.Log("active");
 
     }
 

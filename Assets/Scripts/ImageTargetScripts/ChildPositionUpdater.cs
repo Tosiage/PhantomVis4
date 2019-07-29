@@ -19,6 +19,7 @@ public class ChildPositionUpdater : MonoBehaviour
     {
 
         this.gameObject.transform.position = modelParent.transform.position + md.posTempModel;
+        Debug.Log(this.transform.position + " = " + modelParent.transform.position + " + " + md.posTempModel);
         this.gameObject.transform.rotation = modelParent.transform.rotation * md.rotTempModel;
 
     }

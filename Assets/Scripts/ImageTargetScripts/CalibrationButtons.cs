@@ -35,70 +35,75 @@ public class CalibrationButtons : MonoBehaviour, IInputClickHandler
 
         }
 
-        if (this.name == "Up")
+        if(this.name == "Up")
         {
-
-            md.posTempModel = new Vector3(md.posTempModel.x, md.posTempModel.y + 0.01f, md.posTempModel.z);
-            Debug.Log("Up");
-
+            model.transform.localPosition = new Vector3(model.transform.localPosition.x, model.transform.localPosition.y + 0.01f, model.transform.localPosition.z);
+            //md.posTempModel = model.transform.localPosition;
+           // md.posTempModel = new Vector3(md.posTempModel.x, md.posTempModel.y + 0.01f, md.posTempModel.z);
+          
         }
         if (this.name == "Down")
         {
-            md.posTempModel = new Vector3(md.posTempModel.x, md.posTempModel.y - 0.01f, md.posTempModel.z);
-            Debug.Log("Down");
+            model.transform.localPosition = new Vector3(model.transform.localPosition.x, model.transform.localPosition.y - 0.01f, model.transform.localPosition.z);
+            //md.posTempModel = model.transform.localPosition;
+           //md.posTempModel = new Vector3(md.posTempModel.x, md.posTempModel.y - 0.01f, md.posTempModel.z);
         }
         if (this.name == "Back")
         {
-            md.posTempModel = new Vector3(md.posTempModel.x, md.posTempModel.y, md.posTempModel.z + 0.01f);
-            Debug.Log("Back");
+            model.transform.localPosition = new Vector3(model.transform.localPosition.x, model.transform.localPosition.y, model.transform.localPosition.z + 0.01f);
+            //md.posTempModel = model.transform.localPosition;
+           //md.posTempModel = new Vector3(md.posTempModel.x, md.posTempModel.y, md.posTempModel.z + 0.01f);
         }
         if (this.name == "Front")
         {
-            md.posTempModel = new Vector3(md.posTempModel.x, md.posTempModel.y, md.posTempModel.z - 0.01f);
-            Debug.Log("Front");
+            model.transform.localPosition = new Vector3(model.transform.localPosition.x, model.transform.localPosition.y, model.transform.localPosition.z - 0.01f);
+            //md.posTempModel = model.transform.localPosition;
+           //md.posTempModel = new Vector3(md.posTempModel.x, md.posTempModel.y, md.posTempModel.z - 0.01f);
         }
         if (this.name == "Right")
         {
-            md.posTempModel = new Vector3(md.posTempModel.x + 0.01f, md.posTempModel.y, md.posTempModel.z);
-            Debug.Log("Right");
+            model.transform.localPosition = new Vector3(model.transform.localPosition.x + 0.01f, model.transform.localPosition.y, model.transform.localPosition.z);
+            //md.posTempModel = model.transform.localPosition;
+          // md.posTempModel = new Vector3(md.posTempModel.x + 0.01f, md.posTempModel.y, md.posTempModel.z);
         }
         if (this.name == "Left")
         {
-            md.posTempModel = new Vector3(md.posTempModel.x - 0.01f, md.posTempModel.y, md.posTempModel.z);
-            Debug.Log("Left");
+            model.transform.localPosition = new Vector3(model.transform.localPosition.x - 0.01f, model.transform.localPosition.y, model.transform.localPosition.z);
+            //md.posTempModel = model.transform.localPosition;
+          // md.posTempModel = new Vector3(md.posTempModel.x - 0.01f, md.posTempModel.y, md.posTempModel.z);
         }
 
         if (this.name == "RotateX")
         {
-            model.transform.Rotate(5, 0, 0, Space.World);
-            md.rotTempModel = model.transform.localRotation;
+            model.transform.Rotate(5, 0, 0, Space.Self);
+            //md.rotTempModel = model.transform.localRotation;
         }
         if (this.name == "RotateXm")
         {
-            model.transform.Rotate(-5, 0, 0, Space.World);
-            md.rotTempModel = model.transform.localRotation;
+            model.transform.Rotate(-5, 0, 0, Space.Self);
+           // md.rotTempModel = model.transform.localRotation;
         }
 
         if (this.name == "RotateY")
         {
-            model.transform.Rotate(0, 5, 0, Space.World);
-            md.rotTempModel = model.transform.localRotation;
+            model.transform.Rotate(0, 5, 0, Space.Self);
+           // md.rotTempModel = model.transform.localRotation;
         }
         if (this.name == "RotateYm")
         {
-            model.transform.Rotate(0, -5, 0, Space.World);
-            md.rotTempModel = model.transform.localRotation;
+            model.transform.Rotate(0, -5, 0, Space.Self);
+           // md.rotTempModel = model.transform.localRotation;
         }
 
         if (this.name == "RotateZ")
         {
-            model.transform.Rotate(0, 0, 5, Space.World);
-            md.rotTempModel = model.transform.localRotation;
+            model.transform.Rotate(0, 0, 5, Space.Self);
+            //md.rotTempModel = model.transform.localRotation;
         }
         if (this.name == "RotateZm")
         {
             model.transform.Rotate(0, 0, -5, Space.World);
-            md.rotTempModel = model.transform.localRotation;
+          //  md.rotTempModel = model.transform.localRotation;
         }
     }
 
