@@ -2,38 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModelPositionUpdater : MonoBehaviour {
+public class ModelPositionUpdater : MonoBehaviour
+{
 
     [HideInInspector] public Vector3 pos1;
     [HideInInspector] public Vector3 pos2;
 
-    [HideInInspector] public List<TargetData> targetDatas;
     [HideInInspector] public List<Vector3> positions;
     [HideInInspector] public List<Quaternion> rotations;
     [HideInInspector] public Vector3 addedUpVectors;
     [HideInInspector] public Vector3 averagePos;
-
+    public List<TargetData> targetDatas;
     public GameObject[] targetManagerTargets;
-    public List<TargetData> targetManagerTargetDatas;
+
+
+
+    public GameObject model;
+    ModelData md;
 
     //The averaged rotational value
     private Quaternion averageRotation;
 
 
     // Use this for initialization
-    void Start () {
-        
-       
+    void Start()
+    {
+
+
         positions = new List<Vector3>();
         rotations = new List<Quaternion>();
-
         targetManagerTargets = GameObject.Find("TargetManager").GetComponent<TargetManager>().targets;
         targetDatas = GameObject.Find("TargetManager").GetComponent<TargetManager>().targetDatas;
 
+        md = model.GetComponent<ModelData>();
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         //Zu Beginn jedes Updates Leeren der Listen, um zu vermeiden, dass Daten verfälscht werden
         //Liste würde sonst immer länger werden
         positions.Clear();
@@ -43,26 +50,23 @@ public class ModelPositionUpdater : MonoBehaviour {
         //Wenn Target gerade sichtbar ist, wird Position des Targets relativ zum Phantom in position Liste abgespeichert
         //Rotation des Targets relativ zum Phantom wird in rotations Liste abgespeichert
         //Anschließend werden Mittelwerte beider Listen gebildet und dem GameObjekt des Phantoms zugewiesen
-        foreach(TargetData td in targetDatas)
+        foreach (TargetData td in targetDatas)
         {
             if (td.isVisible && td.initialCalibration || td.isVisible && td.calibrated)
             {
                 var currentTransform = td.transform;
-               // Quaternion offsetRot = Quaternion.Euler(td.angleX, td.angleY, td.angleZ);
-                Quaternion offsetRot = td.relativeRot;
-
-                var addedOffsetPosition = td.relativePos + td.relativePosTemp;
-                var multipliedOffsetRot = td.relativeRot * td.relativeRotTemp;
+                // Quaternion offsetRot = Quaternion.Euler(td.angleX, td.angleY, td.angleZ);
+                //Quaternion offsetRot = td.relativeRot;
 
                 //wenn man die TargetData per hand eingibt, muss die offsetRot noch draufmultipliziert werden,
                 //wenn man die TargetData mit Calibrate kalibriert, nicht.
-                // Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation * offsetRot);
+                //Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation * offsetRot);
                 Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation);
                 Matrix4x4 Mtra = Matrix4x4.Translate(currentTransform.position);
-                Vector3 posfinal = (Vector3)(Mtra * Mrot * new Vector4(addedOffsetPosition.x, addedOffsetPosition.y, addedOffsetPosition.z, 1));
+                Vector3 posfinal = (Vector3)(Mtra * Mrot * new Vector4(td.relativePos.x, td.relativePos.y, td.relativePos.z, 1));
                 positions.Add(posfinal);
-                rotations.Add(currentTransform.rotation * multipliedOffsetRot);
- 
+                rotations.Add(currentTransform.rotation * td.relativeRot);
+
             }
         }
 
@@ -81,12 +85,12 @@ public class ModelPositionUpdater : MonoBehaviour {
         //need to be averaged.
         int addAmount = 0;
 
-        if(rotations.Count < 1)
+        if (rotations.Count < 1)
         {
-           // this.gameObject.transform.GetComponent<Renderer>().enabled = false;
+            // this.gameObject.transform.GetComponent<Renderer>().enabled = false;
             return;
         }
-     
+
         //Global variable which represents the additive quaternion
         Quaternion addedRotation = rotations[0];
 
@@ -137,6 +141,7 @@ public class ModelPositionUpdater : MonoBehaviour {
 
         this.transform.position = averagePos;
         this.transform.rotation = averageRotation;
+        Debug.Log("active");
 
     }
 
@@ -171,3 +176,4 @@ public class ModelPositionUpdater : MonoBehaviour {
         }
     }
 }
+

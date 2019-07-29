@@ -5,9 +5,7 @@ using UnityEngine;
 public class TargetData : MonoBehaviour
 {
     public Vector3 relativePos;
-    public Vector3 relativePosTemp;
     public Quaternion relativeRot;
-    public Quaternion relativeRotTemp;
     public float angleX;
     public float angleY;
     public float angleZ;
@@ -20,13 +18,11 @@ public class TargetData : MonoBehaviour
     public Vector3 posPMTold;
 
     //Durch Kalibrierung mit der Polaris werden die Werte für die relative Position und relative Rotation gesetzt
-    public TargetData(Vector3 relativePos, Vector3 relativePosTemp, Quaternion relativeRot, Quaternion relativeRotTemp, int angleX, int angleY, int angleZ,
+    public TargetData(Vector3 relativePos, Quaternion relativeRot, int angleX, int angleY, int angleZ,
         bool isVisible, bool isExtendedTracked, bool calibrated, bool initialCalibration, Matrix4x4 matrix, Vector3 posPMTold, Quaternion rotPMTold)
     {
         this.relativePos = relativePos;
-        this.relativePosTemp = relativePosTemp;
         this.relativeRot = relativeRot;
-        this.relativeRotTemp = relativeRotTemp;
         this.isVisible = isVisible;
         this.isExtendedTracked = isExtendedTracked;
         this.calibrated = calibrated;

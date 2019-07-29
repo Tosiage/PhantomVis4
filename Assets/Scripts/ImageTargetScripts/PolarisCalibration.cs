@@ -45,9 +45,7 @@ public class PolarisCalibration : MonoBehaviour
                                       //posTPM = ConvertRightHandedToLeftHandedVector(posTPMold);
 
             PMtoBox = Matrix4x4.TRS(posPMBold, rotPMBold, scale);
-            //PMtoBox = swapRows(PMtoBox);
             PMtoTarget = Matrix4x4.TRS(posPMTold, rotPMTold, scale);
-            //TargetToPM = swapRows(TargetToPM);
 
             TargetToBox = PMtoBox * PMtoTarget.inverse;
 
@@ -75,8 +73,8 @@ public class PolarisCalibration : MonoBehaviour
              Debug.Log(rotPMBnew);
              var posPMBnew = PMtoBox.GetColumn(3);
              Debug.Log(posPMBnew);*/
-            td.relativePosTemp = Vector3.zero;
-            td.relativeRotTemp = Quaternion.identity;
+           // td.relativePosTemp = Vector3.zero;
+            //td.relativeRotTemp = Quaternion.identity;
             td.relativePos = posTB * 0.001f;
             td.relativeRot = rotTB;
         }
@@ -84,19 +82,7 @@ public class PolarisCalibration : MonoBehaviour
 
     }
 
-    private Matrix4x4 swapRows(Matrix4x4 m)
-    {
-        var m1 = m.GetRow(1);
-        var m2 = m.GetRow(2);
-        //m.SetRow(1, m2);
-        //m.SetRow(2, m1);
-        var c1 = m.GetColumn(1);
-        var c2 = m.GetColumn(2);
-        //m.SetColumn(1, c2);
-        //m.SetColumn(2, c1);
-        Debug.Log(m.ToString());
-        return m;
-    }
+   
 
     private Quaternion rightCoordToUnityCord(Quaternion q)
     {
