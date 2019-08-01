@@ -15,11 +15,6 @@ public class ModelPositionUpdater : MonoBehaviour
     public List<TargetData> targetDatas;
     public GameObject[] targetManagerTargets;
 
-
-
-    public GameObject model;
-    ModelData md;
-
     //The averaged rotational value
     private Quaternion averageRotation;
 
@@ -34,7 +29,6 @@ public class ModelPositionUpdater : MonoBehaviour
         targetManagerTargets = GameObject.Find("TargetManager").GetComponent<TargetManager>().targets;
         targetDatas = GameObject.Find("TargetManager").GetComponent<TargetManager>().targetDatas;
 
-        md = model.GetComponent<ModelData>();
 
     }
 

@@ -10,28 +10,24 @@ public class Calibrate : MonoBehaviour
     public GameObject model;
     public GameObject modelParent;
     public bool calibrationStep1;
-   // ModelData md;
 
 
     // Use this for initialization
     void Start()
     {
+        model = GameObject.FindGameObjectWithTag("model");
+        modelParent = GameObject.FindGameObjectWithTag("modelParent");
         targetManagerTargets = GameObject.Find("TargetManager").GetComponent<TargetManager>().targets;
         targetDatas = GameObject.Find("TargetManager").GetComponent<TargetManager>().targetDatas;
         td = GameObject.Find("CalibrationTarget").GetComponent<TargetData>();
-      //  md = model.GetComponent<ModelData>();
         calibrationStep1 = true;
         foreach (TargetData t in targetDatas)
         {
             t.initialCalibration = false;
             t.calibrated = false;
             t.relativePos = Vector3.zero;
-            // t.relativePosTemp = Vector3.zero;
             t.relativeRot = Quaternion.identity;
-            //t.relativeRotTemp = Quaternion.identity;
         }
-      //  md.posTempModel = Vector3.zero;
-        //md.rotTempModel = Quaternion.identity;
     }
 
     private void Update()
@@ -132,23 +128,17 @@ public class Calibrate : MonoBehaviour
                 Quaternion offsetRot = Quaternion.Inverse(t.transform.rotation) * model.transform.rotation;
                 t.relativeRot = offsetRot;
                 t.calibrated = true;
-                /*
-                t.calibrated = true;
-                t.relativePos = t.relativePos + t.relativePosTemp;
-                t.relativeRot = t.relativeRot * t.relativeRotTemp;*/
-
             }
             if (t.initialCalibration)
             {
                 t.initialCalibration = false;
             }
-            //t.relativePosTemp = Vector3.zero;
-            //t.relativeRotTemp = Quaternion.identity;
         }
         model.transform.localPosition = Vector3.zero;
         model.transform.localRotation = Quaternion.identity;
-      //  md.posTempModel = Vector3.zero;
-       // md.rotTempModel = Quaternion.identity;
+        GameObject.Find("XAxis").GetComponent<Renderer>().enabled = true;
+        GameObject.Find("YAxis").GetComponent<Renderer>().enabled = true;
+        GameObject.Find("ZAxis").GetComponent<Renderer>().enabled = true;
     }
 
 
