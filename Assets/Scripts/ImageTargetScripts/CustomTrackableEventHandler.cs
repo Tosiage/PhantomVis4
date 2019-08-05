@@ -11,6 +11,7 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
     protected TrackableBehaviour.Status m_NewStatus;
     private TargetData targetData;
 
+    
     #endregion // PROTECTED_MEMBER_VARIABLES
 
     #region UNITY_MONOBEHAVIOUR_METHODS
@@ -49,6 +50,7 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " detected " + newStatus.ToString());
             OnTrackingFound(Color.blue, false, false);
+            
         }
         else if (newStatus == TrackableBehaviour.Status.TRACKED)
         {
@@ -99,6 +101,7 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
             if(mTrackableBehaviour.TrackableName != "ar_marker17")
             {
                 component.material.color = MaterialColor;
+                
             }
             
         }    

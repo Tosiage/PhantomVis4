@@ -7,14 +7,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: calibrationTool
-  m_Shader: {fileID: 4800000, guid: f55de1dc635ac1a4497913ae198cfc4b, type: 3}
+  m_Shader: {fileID: 4800000, guid: d45c0efca53019e43891b0f610f8146e, type: 3}
   m_ShaderKeywords: _BORDER_LIGHT_USES_HOVER_COLOR _DIRECTIONAL_LIGHT _DISABLE_ALBEDO_MAP
     _HOVER_LIGHT _REFLECTIONS _SPECULAR_HIGHLIGHTS
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 100
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -102,7 +103,7 @@ Material:
     - _Reflections: 1
     - _Refraction: 0
     - _RefractiveIndex: 0
-    - _RenderQueueOverride: -1
+    - _RenderQueueOverride: 100
     - _RimLight: 0
     - _RimPower: 0.25
     - _RoundCornerMargin: 0.01
