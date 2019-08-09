@@ -13,10 +13,12 @@ public class CalibrationButtons : MonoBehaviour, IInputClickHandler
 
     void Start()
     {
-        model = GameObject.FindGameObjectWithTag("model");
+        
+        //model = GameObject.FindGameObjectWithTag("model");
         calibrate = GameObject.Find("Calibration").GetComponent<Calibrate>();
 
     }
+
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
