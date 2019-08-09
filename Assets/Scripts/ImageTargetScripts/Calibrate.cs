@@ -10,6 +10,7 @@ public class Calibrate : MonoBehaviour
     public GameObject model;
     public GameObject modelParent;
     public bool calibrationStep1;
+    public GameObject calibratedBorder;
 
 
     // Use this for initialization
@@ -127,7 +128,15 @@ public class Calibrate : MonoBehaviour
                 t.relativePos = relativePosition;
                 Quaternion offsetRot = Quaternion.Inverse(t.transform.rotation) * model.transform.rotation;
                 t.relativeRot = offsetRot;
-                t.calibrated = true;
+                if (!t.calibrated)
+                {
+                    t.calibrated = true;
+                    var go = Instantiate(calibratedBorder, t.transform.position, t.transform.localRotation);
+                    go.transform.parent = t.transform;
+                    StartCoroutine(RotateMe(Vector3.up * 90, 0.5f, go));
+
+
+                }
             }
             if (t.initialCalibration)
             {
@@ -139,6 +148,18 @@ public class Calibrate : MonoBehaviour
         GameObject.Find("XAxis").GetComponent<Renderer>().enabled = true;
         GameObject.Find("YAxis").GetComponent<Renderer>().enabled = true;
         GameObject.Find("ZAxis").GetComponent<Renderer>().enabled = true;
+    }
+
+
+    IEnumerator RotateMe(Vector3 byAngles, float inTime, GameObject go)
+    {
+        var fromAngle = go.transform.localRotation;
+        var toAngle = Quaternion.Euler(go.transform.localEulerAngles + byAngles);
+        for (var t = 0f; t < 1; t += Time.deltaTime / inTime)
+        {
+            go.transform.localRotation = Quaternion.Lerp(fromAngle, toAngle, t);
+            yield return null;
+        }
     }
 
 
