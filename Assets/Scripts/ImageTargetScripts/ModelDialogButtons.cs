@@ -10,7 +10,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
     public GameObject phantomParent;
 
     public Calibrate c;
-   
+    public TargetData td;
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
@@ -18,6 +18,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
         {
             boxParent.SetActive(true);
             c.SetModelAndParent(box, boxParent);
+            td.relativePos = new Vector3(0f, -0.101f, 0.061f);
             phantomParent.SetActive(false);
            
         }
@@ -25,6 +26,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
         {
             phantomParent.SetActive(true);
             c.SetModelAndParent(phantom, phantomParent);
+            td.relativePos = new Vector3(-0.022f, -0.261f, 0.388f);
             boxParent.SetActive(false);
         }
     }
@@ -36,6 +38,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
         phantom = GameObject.Find("TorsoM");
         phantomParent = GameObject.Find("ModelParentPhantom");
         c = GameObject.Find("Calibration").GetComponent<Calibrate>();
+        td = GameObject.Find("CalibrationTarget").GetComponent<TargetData>();
         
 
     }

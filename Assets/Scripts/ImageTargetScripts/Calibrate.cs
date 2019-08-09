@@ -11,6 +11,7 @@ public class Calibrate : MonoBehaviour
     public GameObject modelParent;
     public bool calibrationStep1;
     public GameObject calibratedBorder;
+    public GameObject calibrationPosition;
 
 
     // Use this for initialization
@@ -18,6 +19,7 @@ public class Calibrate : MonoBehaviour
     {
         model = GameObject.Find("Box");
         modelParent = GameObject.Find("ModelParent");
+        calibrationPosition = GameObject.Find("CalibrationPosition");
         targetManagerTargets = GameObject.Find("TargetManager").GetComponent<TargetManager>().targets;
         targetDatas = GameObject.Find("TargetManager").GetComponent<TargetManager>().targetDatas;
         td = GameObject.Find("CalibrationTarget").GetComponent<TargetData>();
@@ -37,9 +39,17 @@ public class Calibrate : MonoBehaviour
         {
             PositionPhantomWithInitialMarker();
         }
-
-        this.transform.position = modelParent.transform.position;
-        this.transform.rotation = modelParent.transform.rotation;
+        if(model.name == "Box")
+        {
+            this.transform.position = modelParent.transform.position;
+            this.transform.rotation = modelParent.transform.rotation;
+        }
+        else
+        {
+            this.transform.position = calibrationPosition.transform.position;
+            this.transform.rotation = calibrationPosition.transform.rotation;
+        }
+        
     }
 
     public void SetModelAndParent(GameObject modelObject, GameObject modelParentObject)
