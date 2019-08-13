@@ -10,6 +10,8 @@ public class TargetManager : MonoBehaviour
     public List<TargetData> targetDatas;
     public bool atLeastOneVisible;
     public GameObject dirButton;
+    public GameObject calibratedBorder;
+    public List<GameObject> borders;
 
     // Use this for initialization
     void Awake()
@@ -22,6 +24,7 @@ public class TargetManager : MonoBehaviour
             var data = t.GetComponent<TargetData>();
             targetDatas.Add(data);
         }
+        borders = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -111,6 +114,62 @@ public class TargetManager : MonoBehaviour
         dirsList.Remove(Path.Combine(Application.persistentDataPath, "QCAR"));
 
         return dirsList;
+    }
+
+    //Creates a new border around a freshly calibrated target
+    public void CreateNewBorder(TargetData t)
+    {
+        if (!t.calibrated)
+        {
+            t.calibrated = true;
+            var go = Instantiate(calibratedBorder, t.transform.position, t.transform.localRotation);
+            go.transform.parent = t.transform;
+            StartCoroutine(RotateMe(Vector3.up * 90, 0.5f, go));
+            borders.Add(go);
+
+        }
+    }
+
+    //deletes all borders (that indicate if the target is calibrated) in the scene
+    public void DeleteAllBorders()
+    {
+        for (int i = 0; i < borders.Count; i++)
+        {
+            Destroy(borders[i]);
+        }
+        borders.Clear();
+        for (int i = 0; i < targetDatas.Count; i++)
+        {
+            targetDatas[i].calibrated = false;
+        }
+        
+    }
+
+    //Creates borders for all calibrated targets (this function is used when an old calibration is loaded)
+    public void LoadBorders()
+    {
+        foreach (var t in targetDatas)
+        {
+            if (t.calibrated)
+            {
+                var go = Instantiate(calibratedBorder, t.transform.position, t.transform.localRotation);
+                go.transform.parent = t.transform;
+                StartCoroutine(RotateMe(Vector3.up * 90, 0.5f, go));
+                borders.Add(go);
+            }
+        }
+    }
+
+    //rotates a freshly created border
+    IEnumerator RotateMe(Vector3 byAngles, float inTime, GameObject go)
+    {
+        var fromAngle = go.transform.localRotation;
+        var toAngle = Quaternion.Euler(go.transform.localEulerAngles + byAngles);
+        for (var t = 0f; t < 1; t += Time.deltaTime / inTime)
+        {
+            go.transform.localRotation = Quaternion.Lerp(fromAngle, toAngle, t);
+            yield return null;
+        }
     }
 
 

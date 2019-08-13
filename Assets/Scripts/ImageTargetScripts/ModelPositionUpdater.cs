@@ -54,7 +54,7 @@ public class ModelPositionUpdater : MonoBehaviour
 
                 //wenn man die TargetData per hand eingibt, muss die offsetRot noch draufmultipliziert werden,
                 //wenn man die TargetData mit Calibrate kalibriert, nicht.
-                //Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation * offsetRot);
+               // Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation * td.relativeRot);
                 Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation);
                 Matrix4x4 Mtra = Matrix4x4.Translate(currentTransform.position);
                 Vector3 posfinal = (Vector3)(Mtra * Mrot * new Vector4(td.relativePos.x, td.relativePos.y, td.relativePos.z, 1));

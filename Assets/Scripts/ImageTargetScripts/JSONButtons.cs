@@ -14,13 +14,15 @@ public class JSONButtons : MonoBehaviour, IInputClickHandler
         }
         if (this.name == "DataLoad")
         {
-            tm.SelectDataToLoad(this.transform.position, this.transform.rotation);
+            tm.SelectDataToLoad(this.transform.position, this.transform.rotation); 
         }
         else
         {
             if (this.name != "DataSave" && this.name != "DataLoad")
             {
+                tm.DeleteAllBorders();
                 tm.LoadData(this.name);
+                tm.LoadBorders();
             }
 
         }
