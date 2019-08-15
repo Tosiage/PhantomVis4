@@ -28,7 +28,8 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
             phantomParent.SetActive(false);
             polarisModel.SetActive(false);
             c.calibrationStep1 = true;
-           
+            c.transform.GetChild(0).localScale = Vector3.one;
+            c.transform.GetChild(1).localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
         if(this.name == "PhantomButton")
         {
@@ -42,6 +43,8 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
             boxParent.SetActive(false);
             polarisModel.SetActive(false);
             c.calibrationStep1 = true;
+            c.transform.GetChild(0).localScale = Vector3.one;
+            c.transform.GetChild(1).localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
     }
 

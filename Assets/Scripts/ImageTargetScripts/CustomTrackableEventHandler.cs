@@ -70,15 +70,14 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
         else if (newStatus == TrackableBehaviour.Status.NO_POSE)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost" + newStatus.ToString());
-            OnTrackingFound(Color.black, false, false);
-            //
+            OnTrackingLost();            
         }
         else
         {
             // For combo of previousStatus=UNKNOWN + newStatus=UNKNOWN|NOT_FOUND
             // Vuforia is starting, but tracking has not been lost or found yet
             // Call OnTrackingLost() to hide the augmentations
-            OnTrackingLost(Color.black);
+            OnTrackingLost();
         }
     }
 
@@ -116,8 +115,24 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
     }
 
 
-    protected virtual void OnTrackingLost(Color MaterialColor)
-    { }
+    protected virtual void OnTrackingLost()
+    {
+        var rendererComponents = GetComponentsInChildren<Renderer>(true);
+        var colliderComponents = GetComponentsInChildren<Collider>(true);
+        var canvasComponents = GetComponentsInChildren<Canvas>(true);
+
+        // Disable rendering:
+        foreach (var component in rendererComponents)
+            component.enabled = false;
+
+        // Disable colliders:
+        foreach (var component in colliderComponents)
+            component.enabled = false;
+
+        // Disable canvas':
+        foreach (var component in canvasComponents)
+            component.enabled = false;
+    }
 
     #endregion // PROTECTED_METHODS
 }

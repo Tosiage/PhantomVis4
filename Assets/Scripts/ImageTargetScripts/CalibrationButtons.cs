@@ -69,29 +69,29 @@ public class CalibrationButtons : MonoBehaviour, IInputClickHandler
 
         if (this.name == "RotateX")
         {
-            model.transform.Rotate(5, 0, 0, Space.Self);
+            model.transform.Rotate(1, 0, 0, Space.Self);
         }
         if (this.name == "RotateXm")
         {
-            model.transform.Rotate(-5, 0, 0, Space.Self);
+            model.transform.Rotate(-1, 0, 0, Space.Self);
         }
 
         if (this.name == "RotateY")
         {
-            model.transform.Rotate(0, 5, 0, Space.Self);
+            model.transform.Rotate(0, 1, 0, Space.Self);
         }
         if (this.name == "RotateYm")
         {
-            model.transform.Rotate(0, -5, 0, Space.Self);
+            model.transform.Rotate(0, -1, 0, Space.Self);
         }
 
         if (this.name == "RotateZ")
         {
-            model.transform.Rotate(0, 0, 5, Space.Self);
+            model.transform.Rotate(0, 0, 1, Space.Self);
         }
         if (this.name == "RotateZm")
         {
-            model.transform.Rotate(0, 0, -5, Space.Self);
+            model.transform.Rotate(0, 0, -1, Space.Self);
         }
     }
 
