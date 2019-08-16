@@ -13,7 +13,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
     public Calibrate c;
     public PolarisCalibration pc;
     public TargetData td;
-
+    public GameObject calibTarget;
     public void OnInputClicked(InputClickedEventData eventData)
     {
         if(this.name == "BoxButton")
@@ -30,6 +30,8 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
             c.calibrationStep1 = true;
             c.transform.GetChild(0).localScale = Vector3.one;
             c.transform.GetChild(1).localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            calibTarget.transform.GetChild(1).localScale = Vector3.zero;
+            calibTarget.transform.GetChild(0).localScale = new Vector3(10f, 10f, 10f);
         }
         if(this.name == "PhantomButton")
         {
@@ -45,6 +47,8 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
             c.calibrationStep1 = true;
             c.transform.GetChild(0).localScale = Vector3.one;
             c.transform.GetChild(1).localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            calibTarget.transform.GetChild(1).localScale = Vector3.zero;
+            calibTarget.transform.GetChild(0).localScale = new Vector3(10f, 10f, 10f);
         }
     }
 
@@ -59,6 +63,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
         td = GameObject.Find("CalibrationTarget").GetComponent<TargetData>();
         polarisModel = GameObject.Find("PolarisBox");
         tm = GameObject.Find("TargetManager").GetComponent<TargetManager>();
+        calibTarget = GameObject.Find("CalibrationTarget");
         
 
     }

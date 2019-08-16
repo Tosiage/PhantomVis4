@@ -26,6 +26,8 @@ public class CalibrationButtons : MonoBehaviour, IInputClickHandler
         if (this.name == "CalibrationTargetButton")
         {
             calibrate.FinishStep1();
+            this.transform.localScale = Vector3.zero;
+            this.transform.parent.GetChild(1).localScale = new Vector3(10f, 10f, 10f); 
         }
 
         //Save the temp to the offset for all targets currently visible

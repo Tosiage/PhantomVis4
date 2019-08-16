@@ -8,9 +8,16 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
     public GameObject[] XAxis;
     public GameObject[] YAxis;
     public GameObject[] ZAxis;
+    private bool xClicked;
+    private bool yClicked;
+    private bool zClicked;
+    
     // Use this for initialization
     void Start()
     {
+        xClicked = false;
+        yClicked = false;
+        zClicked = false;
         XAxis = GameObject.FindGameObjectsWithTag("X");
         YAxis = GameObject.FindGameObjectsWithTag("Y");
         ZAxis = GameObject.FindGameObjectsWithTag("Z");
@@ -37,57 +44,99 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
     {
         if(this.name == "ActivateX")
         {
-            foreach(GameObject go in XAxis)
+            if(!xClicked)
             {
-                go.GetComponent<Renderer>().enabled = true;
-                go.GetComponent<Collider>().enabled = true;
+                foreach (GameObject go in XAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = true;
+                    go.GetComponent<Collider>().enabled = true;
+                }
+                foreach (GameObject go in YAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                foreach (GameObject go in ZAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                xClicked = true;
             }
-            foreach (GameObject go in YAxis)
+            if (xClicked)
             {
-                go.GetComponent<Renderer>().enabled = false;
-                go.GetComponent<Collider>().enabled = false;
+                foreach (GameObject go in XAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                xClicked = false; 
             }
-            foreach (GameObject go in ZAxis)
-            {
-                go.GetComponent<Renderer>().enabled = false;
-                go.GetComponent<Collider>().enabled = false;
-            }
+           
         }
         if(this.name == "ActivateY")
         {
-            foreach (GameObject go in XAxis)
+            if (!yClicked)
             {
-                go.GetComponent<Renderer>().enabled = false;
-                go.GetComponent<Collider>().enabled = false;
+                foreach (GameObject go in XAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                foreach (GameObject go in YAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = true;
+                    go.GetComponent<Collider>().enabled = true;
+                }
+                foreach (GameObject go in ZAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                yClicked = true;
             }
-            foreach (GameObject go in YAxis)
+            if (yClicked)
             {
-                go.GetComponent<Renderer>().enabled = true;
-                go.GetComponent<Collider>().enabled = true;
+                foreach (GameObject go in YAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                yClicked = false;
             }
-            foreach (GameObject go in ZAxis)
-            {
-                go.GetComponent<Renderer>().enabled = false;
-                go.GetComponent<Collider>().enabled = false;
-            }
+           
         }
         if (this.name == "ActivateZ")
         {
-            foreach (GameObject go in XAxis)
+            if (!zClicked)
             {
-                go.GetComponent<Renderer>().enabled = false;
-                go.GetComponent<Collider>().enabled = false;
+                foreach (GameObject go in XAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                foreach (GameObject go in YAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                foreach (GameObject go in ZAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = true;
+                    go.GetComponent<Collider>().enabled = true;
+                }
+                zClicked = true;
             }
-            foreach (GameObject go in YAxis)
+            if (zClicked)
             {
-                go.GetComponent<Renderer>().enabled = false;
-                go.GetComponent<Collider>().enabled = false;
+                foreach (GameObject go in ZAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                zClicked = false;
             }
-            foreach (GameObject go in ZAxis)
-            {
-                go.GetComponent<Renderer>().enabled = true;
-                go.GetComponent<Collider>().enabled = true;
-            }
+           
         }
     }
 
