@@ -35,16 +35,19 @@ public class PolarisCalibration : MonoBehaviour
             posPMTold = td.posPMTold; //PolarisMarker to Target
             rotPMBold = new Quaternion(0.186428f, -0.771821f, -0.461278f, 0.395929f); //PolarisMarker zu Box
             rotPMTold = td.rotPMTold; //PolarisMarker to Target
-            PMtoBox = Matrix4x4.TRS(posPMBold, rotPMBold, scale);
-            PMtoTarget = Matrix4x4.TRS(posPMTold, rotPMTold, scale);
-            TargetToBox = PMtoBox * PMtoTarget.inverse;
+             PMtoBox = Matrix4x4.TRS(posPMBold, rotPMBold, scale);
+             PMtoTarget = Matrix4x4.TRS(posPMTold, rotPMTold, scale);
+           // PMtoBox = Matrix4x4.TRS(posPMBold, Quaternion.identity, scale);
+            //PMtoTarget = Matrix4x4.TRS(posPMTold, Quaternion.identity, scale);
+            TargetToBox = PMtoTarget.inverse * PMtoBox;
             var scale2 = new Vector3(1, -1, 1);
             //var pos = new Vector3(2.337769f, 1.090332f, -0.214233f);
             var Polaris = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(180, 0, 0), scale);
             var MirrorY = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale2);
-            
-            var TargetToBoxFinal = MirrorY * Polaris * TargetToBox;
-            rotTB = rotMatToQuad(TargetToBoxFinal);
+
+            //var TargetToBoxFinal = MirrorY * Polaris * TargetToBox;
+            var TargetToBoxFinal = TargetToBox;
+            rotTB = Quaternion.Normalize(rotMatToQuad(TargetToBoxFinal));
             posTB = TargetToBoxFinal.GetColumn(3);
            
             td.relativePos = posTB * 0.001f;
