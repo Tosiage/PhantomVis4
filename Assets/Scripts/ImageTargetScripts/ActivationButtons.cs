@@ -8,10 +8,16 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
     public GameObject[] XAxis;
     public GameObject[] YAxis;
     public GameObject[] ZAxis;
-    private bool xClicked;
-    private bool yClicked;
-    private bool zClicked;
-    
+    public bool xClicked;
+    public bool yClicked;
+    public bool zClicked;
+    public GameObject xAxisBox;
+    public GameObject yAxisBox;
+    public GameObject zAxisBox;
+    public GameObject xAxisPhantom;
+    public GameObject yAxisPhantom;
+    public GameObject zAxisPhantom;
+
     // Use this for initialization
     void Start()
     {
@@ -21,30 +27,19 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
         XAxis = GameObject.FindGameObjectsWithTag("X");
         YAxis = GameObject.FindGameObjectsWithTag("Y");
         ZAxis = GameObject.FindGameObjectsWithTag("Z");
-        foreach (GameObject go in XAxis)
-        {
-            Debug.Log("X " + go.transform.tag + " " + go.transform.name);
-        }
-        
-        foreach (GameObject go in YAxis)
-        {
-            Debug.Log("Y " + go.transform.tag + " " + go.transform.name);
-        }
-       
-        foreach (GameObject go in ZAxis)
-        {
-            Debug.Log("Z " + go.transform.tag + " " + go.transform.name);
-        }
-        Debug.Log("X length " + XAxis.Length);
-        Debug.Log("Y length " + YAxis.Length);
-        Debug.Log("Z length " + ZAxis.Length);
+        xAxisBox = GameObject.Find("XAxis");
+        yAxisBox = GameObject.Find("YAxis");
+        zAxisBox = GameObject.Find("ZAxis");
+        xAxisPhantom = GameObject.Find("XAxisPhantom");
+        yAxisPhantom = GameObject.Find("YAxisPhantom");
+        zAxisPhantom = GameObject.Find("ZAxisPhantom");
     }
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
         if(this.name == "ActivateX")
         {
-            if(!xClicked)
+            if (!xClicked)
             {
                 foreach (GameObject go in XAxis)
                 {
@@ -63,13 +58,29 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
                 }
                 xClicked = true;
             }
-            if (xClicked)
+            else if (xClicked)
             {
                 foreach (GameObject go in XAxis)
                 {
                     go.GetComponent<Renderer>().enabled = false;
                     go.GetComponent<Collider>().enabled = false;
                 }
+                foreach (GameObject go in YAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                foreach (GameObject go in ZAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                xAxisBox.GetComponent<Renderer>().enabled = true;
+                yAxisBox.GetComponent<Renderer>().enabled = true;
+                zAxisBox.GetComponent<Renderer>().enabled = true;
+                xAxisPhantom.GetComponent<Renderer>().enabled = true;
+                yAxisPhantom.GetComponent<Renderer>().enabled = true;
+                zAxisPhantom.GetComponent<Renderer>().enabled = true;
                 xClicked = false; 
             }
            
@@ -95,13 +106,29 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
                 }
                 yClicked = true;
             }
-            if (yClicked)
+            else if (yClicked)
             {
+                foreach (GameObject go in XAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
                 foreach (GameObject go in YAxis)
                 {
                     go.GetComponent<Renderer>().enabled = false;
                     go.GetComponent<Collider>().enabled = false;
                 }
+                foreach (GameObject go in ZAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                xAxisBox.GetComponent<Renderer>().enabled = true;
+                yAxisBox.GetComponent<Renderer>().enabled = true;
+                zAxisBox.GetComponent<Renderer>().enabled = true;
+                xAxisPhantom.GetComponent<Renderer>().enabled = true;
+                yAxisPhantom.GetComponent<Renderer>().enabled = true;
+                zAxisPhantom.GetComponent<Renderer>().enabled = true;
                 yClicked = false;
             }
            
@@ -127,13 +154,30 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
                 }
                 zClicked = true;
             }
-            if (zClicked)
+           else if (zClicked)
             {
+                foreach (GameObject go in XAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
+                foreach (GameObject go in YAxis)
+                {
+                    go.GetComponent<Renderer>().enabled = false;
+                    go.GetComponent<Collider>().enabled = false;
+                }
                 foreach (GameObject go in ZAxis)
                 {
                     go.GetComponent<Renderer>().enabled = false;
                     go.GetComponent<Collider>().enabled = false;
                 }
+           
+                xAxisBox.GetComponent<Renderer>().enabled = true;
+                yAxisBox.GetComponent<Renderer>().enabled = true;
+                zAxisBox.GetComponent<Renderer>().enabled = true;
+                xAxisPhantom.GetComponent<Renderer>().enabled = true;
+                yAxisPhantom.GetComponent<Renderer>().enabled = true;
+                zAxisPhantom.GetComponent<Renderer>().enabled = true;
                 zClicked = false;
             }
            

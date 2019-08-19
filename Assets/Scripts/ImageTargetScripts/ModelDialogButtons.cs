@@ -29,7 +29,6 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
             polarisModel.SetActive(false);
             c.calibrationStep1 = true;
             c.transform.GetChild(0).localScale = Vector3.one;
-            c.transform.GetChild(1).localScale = new Vector3(0.5f, 0.5f, 0.5f);
             calibTarget.transform.GetChild(1).localScale = Vector3.zero;
             calibTarget.transform.GetChild(0).localScale = new Vector3(10f, 10f, 10f);
         }
@@ -41,12 +40,11 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
             phantomParent.SetActive(true);
             phantomParent.transform.localScale = Vector3.one;
             c.SetModelAndParent(phantom, phantomParent);
-            td.relativePos = new Vector3(-0.022f, -0.261f, 0.388f);
+            td.relativePos = new Vector3(-0.002f, -0.174f, -0.103f);
             boxParent.SetActive(false);
             polarisModel.SetActive(false);
             c.calibrationStep1 = true;
             c.transform.GetChild(0).localScale = Vector3.one;
-            c.transform.GetChild(1).localScale = new Vector3(0.5f, 0.5f, 0.5f);
             calibTarget.transform.GetChild(1).localScale = Vector3.zero;
             calibTarget.transform.GetChild(0).localScale = new Vector3(10f, 10f, 10f);
         }
@@ -56,7 +54,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
     void Start () {
         box = GameObject.Find("Box");
         boxParent = GameObject.Find("ModelParent");
-        phantom = GameObject.Find("TorsoM");
+        phantom = GameObject.Find("Phantom");
         phantomParent = GameObject.Find("ModelParentPhantom");
         c = GameObject.Find("Calibration").GetComponent<Calibrate>();
         pc = GameObject.Find("Calibration").GetComponent<PolarisCalibration>();

@@ -14,7 +14,6 @@ public class CalibrationButtons : MonoBehaviour, IInputClickHandler
     void Start()
     {
         
-        //model = GameObject.FindGameObjectWithTag("model");
         calibrate = GameObject.Find("Calibration").GetComponent<Calibrate>();
 
     }
@@ -36,11 +35,6 @@ public class CalibrationButtons : MonoBehaviour, IInputClickHandler
 
             calibrate.SaveOffset();
 
-        }
-        if(this.name == "Reset")
-        {
-            model.transform.localPosition = Vector3.zero;
-            model.transform.localRotation = Quaternion.identity;
         }
 
         if(this.name == "Up")

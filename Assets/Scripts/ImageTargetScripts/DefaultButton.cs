@@ -16,7 +16,6 @@ public class DefaultButton : MonoBehaviour, IInputClickHandler {
     {
         tm.DeleteAllBorders();
         c.transform.GetChild(0).localScale = Vector3.zero;
-        c.transform.GetChild(1).localScale = Vector3.zero;
         c.enabled = false;
         pc.enabled = true;
         modelParent.SetActive(false);

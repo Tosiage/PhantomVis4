@@ -130,7 +130,7 @@ public class TargetManager : MonoBehaviour
         }
     }
 
-    //deletes all borders (that indicate if the target is calibrated) in the scene
+    //deletes all borders (that indicate if the target is calibrated) in the scene and sets calibrated to false
     public void DeleteAllBorders()
     {
         for (int i = 0; i < borders.Count; i++)
@@ -141,6 +141,7 @@ public class TargetManager : MonoBehaviour
         for (int i = 0; i < targetDatas.Count; i++)
         {
             targetDatas[i].calibrated = false;
+            targetDatas[i].initialCalibration = false;
         }
         
     }
