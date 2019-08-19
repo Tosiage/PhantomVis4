@@ -7,8 +7,8 @@
 	SubShader {
 		Tags { "RenderType"="Opaque" "RenderQueue"="Geometry" }
 		LOD 200
-		ZTest Always
-		ZWrite Off
+		ZTest LEqual
+		ZWrite On
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types

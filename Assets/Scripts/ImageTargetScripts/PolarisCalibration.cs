@@ -31,52 +31,28 @@ public class PolarisCalibration : MonoBehaviour
 
 
             scale = Vector3.one;
-            posPMBold = new Vector3(-109.965297f, -88.147864f, -84.339106f); //PolarisMarker zu Box
+            posPMBold = new Vector3(181.573007f, 49.172991f, -2322.327383f); //PolarisMarker zu Box
             posPMTold = td.posPMTold; //PolarisMarker to Target
-            rotPMBold = new Quaternion(0.482567f, -0.495161f, 0.506550f, 0.515123f); //PolarisMarker zu Box
+            rotPMBold = new Quaternion(0.186428f, -0.771821f, -0.461278f, 0.395929f); //PolarisMarker zu Box
             rotPMTold = td.rotPMTold; //PolarisMarker to Target
-                                      //rotPMB = rightCoordToUnityCord(rotPMBold);
-                                      //rotTPM = rightCoordToUnityCord(rotTPMold);
-                                      /*rotPMB = rotPMBold;
-                                      rotTPM = rotPMTold;
-                                      posPMB = posPMBold;
-                                      posTPM = posPMTold;*/
-                                      //posPMB = ConvertRightHandedToLeftHandedVector(posPMBold);
-                                      //posTPM = ConvertRightHandedToLeftHandedVector(posTPMold);
-
             PMtoBox = Matrix4x4.TRS(posPMBold, rotPMBold, scale);
             PMtoTarget = Matrix4x4.TRS(posPMTold, rotPMTold, scale);
-
             TargetToBox = PMtoBox * PMtoTarget.inverse;
-
-            /*qw= √(1 + m00 + m11 + m22) /2
-    qx = (m21 - m12)/( 4 *qw)
-    qy = (m02 - m20)/( 4 *qw)
-    qz = (m10 - m01)/( 4 *qw)*/
-            /*var qw = Mathf.Sqrt(1 + TargetToBox[0, 0] + TargetToBox[1, 1] + TargetToBox[2, 2]) / 2;
-            var qx = (TargetToBox[2, 1] - TargetToBox[1, 2]) / (4 * qw);
-            var qy = (TargetToBox[0, 2] - TargetToBox[2, 0]) / (4 * qw);
-            var qz = (TargetToBox[1, 0] - TargetToBox[0, 1]) / (4 * qw);*/
-
-            //rotTB = Quaternion.LookRotation(TargetToBox.GetColumn(2), TargetToBox.GetColumn(1));
-            //rotTB = new Quaternion(qx, qy, qz, qw);
             var scale2 = new Vector3(1, -1, 1);
-            var pos = new Vector3(2.337769f, 1.090332f, -0.214233f);
+            //var pos = new Vector3(2.337769f, 1.090332f, -0.214233f);
             var Polaris = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(180, 0, 0), scale);
             var MirrorY = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale2);
-
+            
             var TargetToBoxFinal = MirrorY * Polaris * TargetToBox;
-            rotTB = rotMatToQuad(TargetToBox);
-            posTB = TargetToBox.GetColumn(3);
-
-            /* var rotPMBnew = Quaternion.LookRotation(PMtoBox.GetColumn(2), PMtoBox.GetColumn(1));
-             Debug.Log(rotPMBnew);
-             var posPMBnew = PMtoBox.GetColumn(3);
-             Debug.Log(posPMBnew);*/
-           // td.relativePosTemp = Vector3.zero;
-            //td.relativeRotTemp = Quaternion.identity;
+            rotTB = rotMatToQuad(TargetToBoxFinal);
+            posTB = TargetToBoxFinal.GetColumn(3);
+           
             td.relativePos = posTB * 0.001f;
             td.relativeRot = rotTB;
+            Debug.Log(td.id + " TargetToBox: \n" + TargetToBox);
+            Debug.Log(td.id + " TargetToBoxFinal: \n" + TargetToBoxFinal);
+            Debug.Log(td.id + " relativePos: " + td.relativePos);
+            Debug.Log(td.id + " relativeRot: " + td.relativeRot);
         }
 
 

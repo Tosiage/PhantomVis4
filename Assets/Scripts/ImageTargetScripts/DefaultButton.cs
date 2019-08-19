@@ -28,7 +28,7 @@ public class DefaultButton : MonoBehaviour, IInputClickHandler {
             }
         }
         polarisModel.SetActive(true);
-        polarisModel.transform.localScale = new Vector3(0.18f, 0.345f, 0.525f);
+        polarisModel.transform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
         tm.LoadBorders();
 
     }
@@ -36,7 +36,7 @@ public class DefaultButton : MonoBehaviour, IInputClickHandler {
     // Use this for initialization
     void Start () {
         calibration = GameObject.Find("Calibration");
-        polarisModel = GameObject.Find("PolarisBox");
+        polarisModel = GameObject.Find("PolarisPhantom");
         modelParent = GameObject.Find("ModelParent");
         modelParentPhantom = GameObject.Find("ModelParentPhantom");
         tm = GameObject.Find("TargetManager").GetComponent<TargetManager>();
