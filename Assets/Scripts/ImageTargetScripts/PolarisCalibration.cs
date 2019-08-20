@@ -49,6 +49,7 @@ public class PolarisCalibration : MonoBehaviour
             var TargetToBoxFinal = TargetToBox;
             rotTB = Quaternion.Normalize(rotMatToQuad(TargetToBoxFinal));
             posTB = TargetToBoxFinal.GetColumn(3);
+            posTB = new Vector3(posTB.x, -posTB.y, posTB.z);
            
             td.relativePos = posTB * 0.001f;
             td.relativeRot = rotTB;

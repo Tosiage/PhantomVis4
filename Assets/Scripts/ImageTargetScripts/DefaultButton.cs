@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class DefaultButton : MonoBehaviour, IInputClickHandler {
     public GameObject calibration;
+    public GameObject polaris;
     public GameObject polarisModel;
     public GameObject modelParent;
     public GameObject modelParentPhantom;
     public TargetManager tm;
     public Calibrate c;
-    public PolarisCalibration pc;
+    public Polaris pc;
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
@@ -41,7 +42,8 @@ public class DefaultButton : MonoBehaviour, IInputClickHandler {
         modelParentPhantom = GameObject.Find("ModelParentPhantom");
         tm = GameObject.Find("TargetManager").GetComponent<TargetManager>();
         c = calibration.GetComponent<Calibrate>();
-        pc = calibration.GetComponent<PolarisCalibration>();
+        polaris = GameObject.Find("Polaris");
+        pc = polaris.GetComponent<Polaris>();
     }
 	
 
