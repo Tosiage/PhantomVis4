@@ -18,11 +18,14 @@ public class TargetData : MonoBehaviour
     public Matrix4x4 matrix;
     public Quaternion rotPMTold;
     public Vector3 posPMTold;
+    public Vector3 polarisPos;
+    public Quaternion polarisRot;
     public string id;
 
     //Durch Kalibrierung mit der Polaris werden die Werte für die relative Position und relative Rotation gesetzt
     public TargetData(Vector3 relativePos, Quaternion relativeRot, int angleX, int angleY, int angleZ,
-        bool isVisible, bool isExtendedTracked, bool calibrated, bool initialCalibration, bool polarisCalibrated, Matrix4x4 matrix, Vector3 posPMTold, Quaternion rotPMTold, string id)
+        bool isVisible, bool isExtendedTracked, bool calibrated, bool initialCalibration, bool polarisCalibrated,
+        Matrix4x4 matrix, Vector3 posPMTold, Quaternion rotPMTold, Vector3 polarisPos, Quaternion polarisRot, string id)
     {
         this.relativePos = relativePos;
         this.relativeRot = relativeRot;
@@ -37,6 +40,8 @@ public class TargetData : MonoBehaviour
         this.matrix = matrix;
         this.posPMTold = posPMTold;
         this.rotPMTold = rotPMTold;
+        this.polarisPos = polarisPos;
+        this.polarisRot = polarisRot;
         this.id = id;
     }
 

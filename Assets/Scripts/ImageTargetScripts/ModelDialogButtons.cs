@@ -14,6 +14,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
     public Polaris pc;
     public TargetData td;
     public GameObject calibTarget;
+    public GameObject polaris;
     public void OnInputClicked(InputClickedEventData eventData)
     {
         if(this.name == "BoxButton")
@@ -59,7 +60,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
         c = GameObject.Find("Calibration").GetComponent<Calibrate>();
         pc = GameObject.Find("Polaris").GetComponent<Polaris>();
         td = GameObject.Find("CalibrationTarget").GetComponent<TargetData>();
-        polarisModel = GameObject.Find("PolarisBox");
+        polarisModel = GameObject.Find("PolarisPhantom");
         tm = GameObject.Find("TargetManager").GetComponent<TargetManager>();
         calibTarget = GameObject.Find("CalibrationTarget");
         

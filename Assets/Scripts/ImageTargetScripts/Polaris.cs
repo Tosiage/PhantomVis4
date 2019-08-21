@@ -47,10 +47,12 @@ public class Polaris : MonoBehaviour {
             var relP = tmpWorldSpaceVuforiaMarker.transform.InverseTransformPoint(tmpWorldSpacePhantom.transform.position);
             var relR = Quaternion.Inverse(tmpWorldSpaceVuforiaMarker.transform.rotation) * tmpWorldSpacePhantom.transform.rotation;
 
-            td.relativePos = relP;
-            td.relativeRot = relR;
-            Debug.Log(relP);
-            Debug.Log(relR);
+            td.polarisPos = relP;
+            td.polarisRot = relR;
+            Debug.Log("relP " + relP);
+            Debug.Log("relR " + relR);
+            Debug.Log(td.id + " " + td.relativeRot);
+            Debug.Log(td.id + " " + td.relativePos);
         }
 		
 	}

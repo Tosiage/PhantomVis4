@@ -26,6 +26,8 @@ public class DefaultButton : MonoBehaviour, IInputClickHandler {
             if (td.polarisCalibrated)
             {
                 td.calibrated = true;
+                td.relativePos = td.polarisPos;
+                td.relativeRot = td.polarisRot;
             }
         }
         polarisModel.SetActive(true);

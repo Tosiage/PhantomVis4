@@ -56,12 +56,12 @@ public class ModelPositionUpdater : MonoBehaviour
                 //wenn man die TargetData mit Calibrate kalibriert, nicht.
                // Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation * td.relativeRot);
                 Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation);
-                Debug.Log("Mrot\n" + Mrot);
                 Matrix4x4 Mtra = Matrix4x4.Translate(currentTransform.position);
-                Debug.Log("Mtra\n" + Mtra);
                 Vector3 posfinal = (Vector3)(Mtra * Mrot * new Vector4(td.relativePos.x, td.relativePos.y, td.relativePos.z, 1));
                 positions.Add(posfinal);
                 rotations.Add(currentTransform.rotation * td.relativeRot);
+                Debug.Log("Positionscript " + td.id + " " + td.relativePos);
+                Debug.Log("Positionscript " + td.id + " " + td.relativeRot);
 
             }
         }

@@ -171,6 +171,7 @@ public class TargetManager : MonoBehaviour
             go.transform.localRotation = Quaternion.Lerp(fromAngle, toAngle, t);
             yield return null;
         }
+       // go.transform.localRotation = Quaternion.identity;
     }
 
 
