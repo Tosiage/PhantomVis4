@@ -6,10 +6,13 @@ using UnityEngine;
 public class JSONButtons : MonoBehaviour, IInputClickHandler
 {
     public TargetManager tm;
+    public ShowAndHide s;
     public void OnInputClicked(InputClickedEventData eventData)
     {
         if (this.name == "DataSave")
         {
+            s.HideCalibrationInterface();
+            s.ShowOrgans();
             tm.SaveData();
         }
         if (this.name == "DataLoad")
@@ -32,6 +35,7 @@ public class JSONButtons : MonoBehaviour, IInputClickHandler
     void Start()
     {
         tm = GameObject.Find("TargetManager").GetComponent<TargetManager>();
+        s = GameObject.Find("TargetManager").GetComponent<ShowAndHide>();
     }
 
 

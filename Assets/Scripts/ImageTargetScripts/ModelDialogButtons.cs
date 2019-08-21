@@ -15,6 +15,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
     public TargetData td;
     public GameObject calibTarget;
     public GameObject polaris;
+    public ShowAndHide s;
     public void OnInputClicked(InputClickedEventData eventData)
     {
         if(this.name == "BoxButton")
@@ -32,6 +33,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
             c.transform.GetChild(0).localScale = Vector3.one;
             calibTarget.transform.GetChild(1).localScale = Vector3.zero;
             calibTarget.transform.GetChild(0).localScale = new Vector3(10f, 10f, 10f);
+            s.ShowCalibrationInterface();
         }
         if(this.name == "PhantomButton")
         {
@@ -48,6 +50,9 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
             c.transform.GetChild(0).localScale = Vector3.one;
             calibTarget.transform.GetChild(1).localScale = Vector3.zero;
             calibTarget.transform.GetChild(0).localScale = new Vector3(10f, 10f, 10f);
+            s.ShowCalibrationInterface();
+            s.HideOrgans();
+            s.ShowTorso();
         }
     }
 
@@ -62,6 +67,7 @@ public class ModelDialogButtons : MonoBehaviour, IInputClickHandler {
         td = GameObject.Find("CalibrationTarget").GetComponent<TargetData>();
         polarisModel = GameObject.Find("PolarisPhantom");
         tm = GameObject.Find("TargetManager").GetComponent<TargetManager>();
+        s = GameObject.Find("TargetManager").GetComponent<ShowAndHide>();
         calibTarget = GameObject.Find("CalibrationTarget");
         
 
