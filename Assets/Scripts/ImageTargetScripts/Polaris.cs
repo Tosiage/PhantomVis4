@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//rechnet die polaris-koordinaten, die in den targetdatas gespeichert sind in unity-koordinaten um
 public class Polaris : MonoBehaviour {
 
     private List<TargetData> targetDatas;

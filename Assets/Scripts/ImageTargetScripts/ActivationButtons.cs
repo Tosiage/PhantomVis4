@@ -4,6 +4,10 @@ using UnityEngine;
 using HoloToolkit;
 using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Unity;
+
+//For User Interface (Interface with arrows for moving the Hologram)
+//All GameObjects that are part of the user interface have a tag
+//x-tag: arrows (rotation and translation buttons) and axis that move the hologram along the x-axis (same for y and z tags)
 public class ActivationButtons : MonoBehaviour, IInputClickHandler {
     public GameObject[] XAxis;
     public GameObject[] YAxis;
@@ -18,7 +22,7 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
     public GameObject yAxisPhantom;
     public GameObject zAxisPhantom;
 
-    // Use this for initialization
+    
     void Start()
     {
         xClicked = false;
@@ -37,8 +41,11 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
+        
         if(this.name == "ActivateX")
         {
+            //sets all the arrows and the axis-gameobject that are used to move the hologram along the x-axis active
+            //sets gameobjects for z- and y-axis inactive
             if (!xClicked)
             {
                 foreach (GameObject go in XAxis)
@@ -58,6 +65,7 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
                 }
                 xClicked = true;
             }
+            //sets all arrows inactive and the axis-gameobjects active
             else if (xClicked)
             {
                 foreach (GameObject go in XAxis)
@@ -87,6 +95,8 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
         }
         if(this.name == "ActivateY")
         {
+            //sets buttons and axis-gameobject for y-axis active
+            //sets buttons and axis-gamebjects for x- and z- axis inactive
             if (!yClicked)
             {
                 foreach (GameObject go in XAxis)
@@ -106,6 +116,7 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
                 }
                 yClicked = true;
             }
+            //sets all buttons inactive and all axis-gameobjects active
             else if (yClicked)
             {
                 foreach (GameObject go in XAxis)
@@ -135,6 +146,8 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
         }
         if (this.name == "ActivateZ")
         {
+            //set all buttons and axis-gameobject for z-axis active
+            //sets all buttons and axis-gameobject for x and y-axis inactive
             if (!zClicked)
             {
                 foreach (GameObject go in XAxis)
@@ -154,6 +167,8 @@ public class ActivationButtons : MonoBehaviour, IInputClickHandler {
                 }
                 zClicked = true;
             }
+            //sets all buttons for z-axis inactive
+            //sets all axis-gameobjects active
            else if (zClicked)
             {
                 foreach (GameObject go in XAxis)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
+//copied the DefaultTrackableEventHandler and changed OnTrackingFound, OnTrackingLost and OnTrackableStateChanged
 public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler {
     #region PROTECTED_MEMBER_VARIABLES
 
@@ -99,7 +100,7 @@ public class CustomTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
             component.enabled = true;
             if(mTrackableBehaviour.TrackableName != "ar_marker17")
             {
-                component.material.color = MaterialColor;
+                component.material.color = MaterialColor; //changes the color of the child objects of the target except for the not attached marker that is used for initial calibration
                 
             }
             

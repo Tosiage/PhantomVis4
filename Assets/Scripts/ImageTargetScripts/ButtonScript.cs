@@ -5,6 +5,8 @@ using HoloToolkit;
 using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Unity;
 
+//only used for calibration target button
+
 public class ButtonScript : MonoBehaviour, IInputClickHandler
 {
     private Calibrate calibrate;

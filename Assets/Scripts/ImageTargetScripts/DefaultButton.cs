@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Loads the "default" calibration, the polaris calibration
 public class DefaultButton : MonoBehaviour, IInputClickHandler {
     public GameObject calibration;
     public GameObject polaris;
@@ -15,7 +16,8 @@ public class DefaultButton : MonoBehaviour, IInputClickHandler {
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        tm.DeleteAllBorders();
+        tm.DeleteAllBorders(); //borders are the gameobjects signalising if a marker is calibrated
+        //deleteallborders deletes the borders from a previous calibration
         c.transform.GetChild(0).localScale = Vector3.zero;
         c.enabled = false;
         pc.enabled = true;
@@ -32,7 +34,7 @@ public class DefaultButton : MonoBehaviour, IInputClickHandler {
         }
         polarisModel.SetActive(true);
         polarisModel.transform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
-        tm.LoadBorders();
+        tm.LoadBorders(); //show borders for all markers that are calibrated with polaris
 
     }
 

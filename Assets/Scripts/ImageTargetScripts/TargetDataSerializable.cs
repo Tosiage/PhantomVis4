@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//a serializable version of the targetdata script with only the offsets between marker and hologram
+//this is how the user calibrations are saved
 [System.Serializable]
 public class TargetDataSerializable
 {

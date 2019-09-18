@@ -5,6 +5,7 @@ using HoloToolkit;
 using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Unity;
 
+//used for moving the hologram with the help of the arrow buttons
 public class CalibrationButtons : MonoBehaviour, IInputClickHandler
 {
     //model of phantom 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit;
 
+//used to highlight the arrow buttons when in focus
 namespace HoloToolkit.Unity.InputModule
 {
     public class ButtonHighlighter : MonoBehaviour, IFocusable

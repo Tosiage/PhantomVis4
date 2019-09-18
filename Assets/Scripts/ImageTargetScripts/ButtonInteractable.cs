@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//if at least one target is visible, the start calibration button is made interactable
 public class ButtonInteractable : MonoBehaviour {
     private TargetManager targetManager;
     private Collider c;

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//shows or hides the organs and the torso of the phantom
+//in the app the user can toggle this via buttons
 public class ShowHideButtons : MonoBehaviour, IInputClickHandler
 {
     ShowAndHide s;

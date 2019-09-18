@@ -64,6 +64,7 @@ public class PolarisCalibration : MonoBehaviour
 
    
 
+    //not used anymore
     private Quaternion rightCoordToUnityCord(Quaternion q)
     {
         return new Quaternion(q.x, q.y, q.z, q.w);

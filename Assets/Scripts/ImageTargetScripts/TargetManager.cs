@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+//manages the lists of targets
 public class TargetManager : MonoBehaviour
 {
-    public GameObject[] targets;
+    public GameObject[] targets; //all targets in scene
     [SerializeField]
-    public List<TargetData> targetDatas;
-    public bool atLeastOneVisible;
+    public List<TargetData> targetDatas; //all targetdatas in scene
+    public bool atLeastOneVisible; //if there is at least one other target currently visible
     public GameObject dirButton;
-    public GameObject calibratedBorder;
-    public List<GameObject> borders;
+    public GameObject calibratedBorder; //the border used to indicate if a marker is calibrated
+    public List<GameObject> borders; //list of all borders in scene
 
     // Use this for initialization
     void Awake()
     {
 
-        atLeastOneVisible = false;
+        atLeastOneVisible = false; 
         targets = GameObject.FindGameObjectsWithTag("target");
         foreach (GameObject t in targets)
         {
@@ -35,12 +36,14 @@ public class TargetManager : MonoBehaviour
         {
             if (t.isVisible)
             {
-                atLeastOneVisible = true;
+                atLeastOneVisible = true; //if at least one other target is visible, the calibration can be started with the "start calibration" button
                 return;
             }
         }
     }
 
+    //saves the calibration and exports files
+    //path used is persistent (can be used on hololens and unity editor)
     public void SaveData()
     {
         Debug.Log("SaveData");
@@ -51,7 +54,7 @@ public class TargetManager : MonoBehaviour
         {
             TargetDataSerializable targetDataSerializable = new TargetDataSerializable(t.relativePos, t.relativeRot, t.id, t.calibrated, System.DateTime.Now.ToString());
             var json = JsonUtility.ToJson(targetDataSerializable, true);
-            var path = Path.Combine(pathDir, t.id + ".antonia");
+            var path = Path.Combine(pathDir, t.id + ".antonia"); //one file for each marker, files have .antonia as ending 
 
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
@@ -64,6 +67,7 @@ public class TargetManager : MonoBehaviour
 
     }
 
+    //instantiates a button for each saved calibration so the user can choose which calibration to load
     public void SelectDataToLoad(Vector3 startPos, Quaternion startRot)
     {
         var dirs = GetDirectories();
@@ -77,6 +81,7 @@ public class TargetManager : MonoBehaviour
         }
     }
 
+    //loads the selected calibration files
     public void LoadData(string directory)
     {
         Debug.Log("LoadData");
@@ -106,6 +111,7 @@ public class TargetManager : MonoBehaviour
         }
     }
 
+    //gets all directories at current location, returns list of those directories
     public List<string> GetDirectories()
     {
         var dirs = Directory.GetDirectories(Application.persistentDataPath);

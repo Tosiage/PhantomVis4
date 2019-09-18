@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//for saving and loading the user calibrations
 public class JSONButtons : MonoBehaviour, IInputClickHandler
 {
     public TargetManager tm;

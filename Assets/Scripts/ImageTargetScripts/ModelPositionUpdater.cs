@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Positions the model (phantom or box) relative to all calibrated markers that are currently visible
+//uses the relativepos and relativerot saved in the targetDatas of each marker
 public class ModelPositionUpdater : MonoBehaviour
 {
 
@@ -49,12 +51,6 @@ public class ModelPositionUpdater : MonoBehaviour
             if (td.isVisible && td.initialCalibration || td.isVisible && td.calibrated)
             {
                 var currentTransform = td.transform;
-                // Quaternion offsetRot = Quaternion.Euler(td.angleX, td.angleY, td.angleZ);
-                //Quaternion offsetRot = td.relativeRot;
-
-                //wenn man die TargetData per hand eingibt, muss die offsetRot noch draufmultipliziert werden,
-                //wenn man die TargetData mit Calibrate kalibriert, nicht.
-               // Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation * td.relativeRot);
                 Matrix4x4 Mrot = Matrix4x4.Rotate(currentTransform.rotation);
                 Matrix4x4 Mtra = Matrix4x4.Translate(currentTransform.position);
                 Vector3 posfinal = (Vector3)(Mtra * Mrot * new Vector4(td.relativePos.x, td.relativePos.y, td.relativePos.z, 1));

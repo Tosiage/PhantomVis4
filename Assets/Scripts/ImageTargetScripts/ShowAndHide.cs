@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//at the beginning the user can decite if he wants to use the box model, the phantom, or the polaris calibration (also phantom but without calibration interface)
+//shows or hides the chosen model
 public class ShowAndHide : MonoBehaviour {
     GameObject polarisPhantom;
     GameObject phantom;

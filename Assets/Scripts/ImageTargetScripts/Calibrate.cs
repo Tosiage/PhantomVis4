@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//this is where the calibration magic happens
+
 public class Calibrate : MonoBehaviour
 {
     public List<TargetData> targetDatas;
@@ -14,7 +16,7 @@ public class Calibrate : MonoBehaviour
     public TargetManager tm;
 
 
-    // Use this for initialization
+   
     void Start()
     {
         model = GameObject.Find("Box");
@@ -42,23 +44,28 @@ public class Calibrate : MonoBehaviour
         }
         if(model.name == "Box")
         {
-            this.transform.position = modelParent.transform.position;
+            this.transform.position = modelParent.transform.position; //position where the calibration gameobject is put
             this.transform.rotation = modelParent.transform.rotation;
         }
         else
         {
-            this.transform.position = calibrationPosition.transform.position;
+            this.transform.position = calibrationPosition.transform.position; //position where the calibration gameobject is put when the model used is the phantom
             this.transform.rotation = calibrationPosition.transform.rotation;
         }
         
     }
 
+    //sets the correct model and parent (because the user can choose between box and phantom)
     public void SetModelAndParent(GameObject modelObject, GameObject modelParentObject)
     {
         model = modelObject;
         modelParent = modelParentObject;
     }
 
+    //step1 is the part where the user can position the hologram with the help of one marker that is not attached to the phantom/box
+    //if the start calibration button is pushed, finishstep1 is called
+    //for the currently visible targets is the initial calibration set to true
+    //these targets are now used for positioning of hologram instead of the not attached marker from the beginning
     public void FinishStep1()
     {
         calibrationStep1 = false;
@@ -76,6 +83,8 @@ public class Calibrate : MonoBehaviour
 
     }
 
+    //used for positioning of the hologram
+    //initial marker is a marker that is not attached to the phantom or box
     private void PositionPhantomWithInitialMarker()
     {
         var currentTransform = td.transform;
@@ -87,6 +96,7 @@ public class Calibrate : MonoBehaviour
         modelParent.transform.rotation = currentTransform.rotation * targetRot;
     }
 
+    //saves the offset between the hologram and the markers that where visible when the calibration is started (finishstep1)
     public void SaveOffsetInitial(TargetData t)
     {
         //vector from target position to model
@@ -101,6 +111,7 @@ public class Calibrate : MonoBehaviour
     }
 
     //Vektor zeigt von Target zu Model
+    //was used for a different approach where every target has its own tempoffset
     public void SaveToTemp()
     {
         /*
@@ -130,7 +141,9 @@ public class Calibrate : MonoBehaviour
 
 
     }
-
+    
+    //saves the offset between hologram and target for each currently visible target
+    //saves said offset in the targetData script for each target
     public void SaveOffset()
     {
         foreach (TargetData t in targetDatas)
@@ -149,7 +162,7 @@ public class Calibrate : MonoBehaviour
             }
             if (t.initialCalibration)
             {
-                t.initialCalibration = false;
+                t.initialCalibration = false; //if the marker is one of the markers that where visible in finishstep1, set them to calibrated and set initalcalibration to false
             }
         }
         model.transform.localPosition = Vector3.zero;
